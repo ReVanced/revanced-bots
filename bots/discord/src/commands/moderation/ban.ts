@@ -20,7 +20,7 @@ export default new ModerationCommand({
         },
         dmt: {
             description:
-                'Time duration to delete messages (default time unit is days, must be from 0s to 7d, default value is 0s)',
+                'Time duration to delete messages (default time unit is days, must be from 0s to 7d, default is 0s)',
             required: false,
             type: ModerationCommand.OptionType.String,
         },

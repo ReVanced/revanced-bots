@@ -1,5 +1,7 @@
 import parse from 'parse-duration'
 
+parse['mo'] = parse['M'] = parse['month']!
+
 const defaultUnitValue = parse['']!
 
 export const parseDuration = (duration: string, defaultUnit?: parse.Units) => {

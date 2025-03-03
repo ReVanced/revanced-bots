@@ -80,7 +80,7 @@ export const discord = {
             parse: ['users'],
             repliedUser: true,
         },
-        partials: [Partials.Message, Partials.Reaction],
+        partials: [Partials.Message, Partials.Reaction, Partials.GuildMember],
     }),
     commands: Object.fromEntries(Object.values(commands).map(cmd => [cmd.name, cmd])) as Record<
         string,

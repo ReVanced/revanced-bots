@@ -3,7 +3,7 @@ import { appliedPresets } from '$/database/schemas'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
 import { on, withContext } from '$/utils/discord/events'
 import { removeRolePreset } from '$/utils/discord/rolePresets'
-import { lt } from 'drizzle-orm'
+import { and, eq, lt } from 'drizzle-orm'
 
 import type { Client } from 'discord.js'
 
@@ -92,11 +92,15 @@ const removeExpiredPresets = async (client: Client) => {
 
     for (const expired of expireds)
         try {
+            logger.debug(`Removing role preset for ${expired.memberId} in ${expired.guildId}`)
+
             const guild = await client.guilds.fetch(expired.guildId)
             const member = await guild.members.fetch(expired.memberId)
 
-            logger.debug(`Removing role preset for ${expired.memberId} in ${expired.guildId}`)
             await removeRolePreset(member, expired.preset)
+            await database
+                .delete(appliedPresets)
+                .where(and(eq(appliedPresets.guildId, expired.guildId), eq(appliedPresets.memberId, expired.memberId)))
         } catch (e) {
             logger.error(`Error while removing role preset for ${expired.memberId} in ${expired.guildId}: ${e}`)
         }

@@ -1,3 +1,11 @@
+# @revanced/bot-websocket-api [1.0.0-dev.10](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.0-dev.9...@revanced/bot-websocket-api@1.0.0-dev.10) (2025-03-03)
+
+
+### Bug Fixes
+
+* fix typings and formatting ([479812e](https://github.com/revanced/revanced-bots/commit/479812e199b52cdb295a5746e0767306afab3413))
+* update repo url ([a21aa34](https://github.com/revanced/revanced-bots/commit/a21aa348d7f32cd0ee65b371e9594520c0a9d3f1))
+
 # @revanced/bot-websocket-api [1.0.0-dev.9](https://github.com/revanced/revanced-helper/compare/@revanced/bot-websocket-api@1.0.0-dev.8...@revanced/bot-websocket-api@1.0.0-dev.9) (2024-08-03)
 
 

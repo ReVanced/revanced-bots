@@ -20,10 +20,10 @@ const PossibleReactions = Object.values(Reactions) as string[]
 
 withContext(on, 'messageReactionAdd', async (context, rct, user) => {
     if (user.bot) return
-    
+
     const { database: db, logger, config } = context
     const { messageScan: msConfig } = config
-    
+
     // If there's no config, we can't do anything
     if (!msConfig?.humanCorrections) return
 

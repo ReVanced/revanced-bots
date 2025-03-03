@@ -110,7 +110,7 @@ export default class Client {
     protected _toBuffer(data: RawData) {
         if (data instanceof Buffer) return data
         if (data instanceof ArrayBuffer) return Buffer.from(data)
-        return Buffer.concat(data)
+        return Buffer.concat(data as Uint8Array[])
     }
 }
 

@@ -19,8 +19,8 @@ export default {
                 },
                 timeout: 60000,
                 forceSendTimeout: 300000,
-            }
-        }
+            },
+        },
     },
     moderation: {
         cure: {
@@ -77,7 +77,7 @@ export default {
         attachments: {
             scanAttachments: true,
             allowedMimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'text/plain'],
-            maxTextFileSize: 512000
+            maxTextFileSize: 512000,
         },
         responses: [
             {

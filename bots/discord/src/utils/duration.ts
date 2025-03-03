@@ -1,6 +1,6 @@
 import parse from 'parse-duration'
 
-parse[''] = parse['s']
+parse[''] = parse['s']!
 parse['mo'] = parse['M'] = parse['month']!
 
 const defaultUnitValue = parse['']!

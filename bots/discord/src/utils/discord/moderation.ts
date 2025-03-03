@@ -57,7 +57,7 @@ export const cureNickname = async (member: GuildMember) => {
         cured =
             member.user.username.length >= 3
                 ? member.user.username
-                : config.moderation?.cure?.defaultName ?? 'Server member'
+                : (config.moderation?.cure?.defaultName ?? 'Server member')
 
     if (cured.toLowerCase() === name.toLowerCase()) return
 

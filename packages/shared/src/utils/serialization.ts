@@ -18,6 +18,6 @@ export function serializePacket<TOp extends Operation>(packet: Packet<TOp>) {
  * @returns A packet
  */
 export function deserializePacket(buffer: Buffer) {
-    const data = BSON.deserialize(buffer)
+    const data = BSON.deserialize(buffer as Uint8Array)
     return parse(PacketSchema, data) as Packet
 }

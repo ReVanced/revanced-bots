@@ -1,8 +1,8 @@
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
-import { config } from '../../../context'
-import { type APIStringSelectComponent, ComponentType } from 'discord.js'
 import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
+import { type APIStringSelectComponent, ComponentType } from 'discord.js'
+import { config } from '../../../context'
 
 const msRcConfig = config.messageScan?.humanCorrections?.allow
 

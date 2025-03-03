@@ -1,3 +1,21 @@
+# @revanced/discord-bot [1.0.0-dev.36](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0-dev.35...@revanced/discord-bot@1.0.0-dev.36) (2025-03-03)
+
+
+### Bug Fixes
+
+* **bots/discord/scripts/build:** check if dist dir exists before cleaning ([c06033e](https://github.com/revanced/revanced-bots/commit/c06033e5730f82438e8052b9b519a8f8e2d25437))
+* **bots/discord/utils/duration:** make second the default unit ([5d1af3c](https://github.com/revanced/revanced-bots/commit/5d1af3c31c3379b6a13684dfb07583737908c8aa))
+* **bots/discord:** add GuildMember partial ([8e3946a](https://github.com/revanced/revanced-bots/commit/8e3946a66602838715787090008c7bfaf72b67e9))
+* **bots/discord:** decrease length of an option in `ban` command ([22d3eea](https://github.com/revanced/revanced-bots/commit/22d3eea88d532792c1237d1a1ab18bc02e57816a))
+* **bots/discord:** delete expired appliedPresets entries after unapplying ([14c98e8](https://github.com/revanced/revanced-bots/commit/14c98e87df1ec4fd762bbc48ca4c06470cb110a2))
+* fix typings and formatting ([479812e](https://github.com/revanced/revanced-bots/commit/479812e199b52cdb295a5746e0767306afab3413))
+* update repo url ([a21aa34](https://github.com/revanced/revanced-bots/commit/a21aa348d7f32cd0ee65b371e9594520c0a9d3f1))
+
+
+### Features
+
+* **bots/discord:** add more month aliases to duration parser ([c2009ca](https://github.com/revanced/revanced-bots/commit/c2009ca6d42e4387bc5f375d76ecf72991b7fe32))
+
 # @revanced/discord-bot [1.0.0-dev.35](https://github.com/revanced/revanced-helper/compare/@revanced/discord-bot@1.0.0-dev.34...@revanced/discord-bot@1.0.0-dev.35) (2024-10-17)
 
 

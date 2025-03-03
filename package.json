@@ -1,5 +1,5 @@
 {
-  "name": "revanced-helper",
+  "name": "revanced-bots",
   "description": "🤖 Bots assisting ReVanced on multiple platforms",
   "private": true,
   "version": "0.0.0",
@@ -15,13 +15,13 @@
     "flint:check": "biome check .",
     "clint": "commitlint --edit"
   },
-  "homepage": "https://github.com/revanced/revanced-helper#readme",
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/revanced/revanced-helper.git"
+    "url": "git+https://github.com/revanced/revanced-bots.git"
   },
   "bugs": {
-    "url": "https://github.com/revanced/revanced-helper/issues"
+    "url": "https://github.com/revanced/revanced-bots/issues"
   },
   "contributors": [
     "Palm <contact@palmdevs.me> (https://palmdevs.me)",

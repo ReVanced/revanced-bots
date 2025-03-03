@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/revanced/revanced-helper.git",
+    "url": "git+https://github.com/revanced/revanced-bots.git",
     "directory": "packages/api"
   },
   "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
@@ -23,9 +23,9 @@
   ],
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/revanced/revanced-helper/issues"
+    "url": "https://github.com/revanced/revanced-bots/issues"
   },
-  "homepage": "https://github.com/revanced/revanced-helper#readme",
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
   "dependencies": {
     "@revanced/bot-shared": "workspace:*",
     "ws": "^8.18.0"

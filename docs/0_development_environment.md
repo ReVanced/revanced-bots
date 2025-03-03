@@ -1,7 +1,7 @@
 # 🏗️ Setting up the development environment
 
-> [!IMPORTANT]  
-> **This project uses [Bun](https://bun.sh) to run and bundle the code.**  
+> [!IMPORTANT]
+> **This project uses [Bun](https://bun.sh) to run and bundle the code.**
 > Compatibility with other runtimes (Node.js, Deno, ...) are not guaranteed and most package scripts won't work.
 
 To start developing, you'll need to set up the development environment first.
@@ -11,8 +11,8 @@ To start developing, you'll need to set up the development environment first.
 2. Clone the mono-repository
 
     ```sh
-    git clone https://github.com/revanced/revanced-helper.git &&
-    cd revanced-helper
+    git clone https://github.com/revanced/revanced-bots.git &&
+    cd revanced-bots
     ```
 
 3. Install dependencies

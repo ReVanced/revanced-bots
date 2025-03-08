@@ -3,15 +3,12 @@ import parse from 'parse-duration'
 parse[''] = parse['s']!
 parse['mo'] = parse['M'] = parse['month']!
 
-const defaultUnitValue = parse['']!
-
 export const parseDuration = (duration: string, defaultUnit?: parse.Units) => {
+    const defaultUnitValue = parse['']!
     if (defaultUnit) parse[''] = parse[defaultUnit]!
-    return (
-        // biome-ignore lint/suspicious/noAssignInExpressions: Expression is ignored
-        // biome-ignore lint/style/noCommaOperator: The last expression (parse call) is returned, it is not confusing
-        (parse[''] = defaultUnitValue), parse(duration, 'ms') ?? Number.NaN
-    )
+    const result = parse(duration, 'ms') ?? Number.NaN
+    parse[''] = defaultUnitValue
+    return result
 }
 
 export const durationToString = (duration: number) => {

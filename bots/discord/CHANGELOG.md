@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.0.0-dev.37](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0-dev.36...@revanced/discord-bot@1.0.0-dev.37) (2025-03-08)
+
+
+### Bug Fixes
+
+* **bots/discord/utils/duration:** fix specified default unit not working ([d138af4](https://github.com/revanced/revanced-bots/commit/d138af46d1f25a11b6f8ab3790ecaa70b1d716a9))
+
 # @revanced/discord-bot [1.0.0-dev.36](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0-dev.35...@revanced/discord-bot@1.0.0-dev.36) (2025-03-03)
 
 

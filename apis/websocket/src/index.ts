@@ -56,12 +56,13 @@ const wss = new WebSocketServer({
 
 wss.on('connection', async (socket, request) => {
     try {
-        if (!request.socket.remoteAddress) {
+        const addrInfo = request.socket.address()
+        if (!('address' in addrInfo)) {
             socket.close()
-            return logger.warn('Connection failed because client is missing remote address')
+            return logger.warn('Connection failed because client is missing remote address. addrInfo =', addrInfo)
         }
 
-        const id = `${request.socket.remoteAddress}:${request.socket.remotePort}`
+        const id = `${addrInfo.address}:${addrInfo.port}`
 
         if (clientIds.has(id)) {
             logger.warn(`Client ${id} already connected, disconnecting old session`)

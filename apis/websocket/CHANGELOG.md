@@ -1,3 +1,11 @@
+# @revanced/bot-websocket-api [1.0.0-dev.11](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.0-dev.10...@revanced/bot-websocket-api@1.0.0-dev.11) (2025-04-04)
+
+
+### Bug Fixes
+
+* **apis/websocket:** attempt to fix missing remote address ([9b2888b](https://github.com/revanced/revanced-bots/commit/9b2888b944ea1d61d31aa5df3536768e9a2dadf8))
+* run projects with `--bun` ([bb2182e](https://github.com/revanced/revanced-bots/commit/bb2182e707fa40c555d56138972eeea28f1b3cf9))
+
 # @revanced/bot-websocket-api [1.0.0-dev.10](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.0-dev.9...@revanced/bot-websocket-api@1.0.0-dev.10) (2025-03-03)
 
 

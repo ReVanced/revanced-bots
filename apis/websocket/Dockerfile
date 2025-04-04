@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=build /build/apis/websocket/dist /app
 USER 1000:1000
 
-ENTRYPOINT [ "bun", "run", "index.js" ]
+ENTRYPOINT [ "bun", "--bun", "run", "index.js" ]

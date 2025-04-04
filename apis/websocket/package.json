@@ -28,13 +28,13 @@
   "homepage": "https://github.com/revanced/revanced-bots#readme",
   "dependencies": {
     "@revanced/bot-shared": "workspace:*",
-    "@sapphire/async-queue": "^1.5.3",
-    "chalk": "^5.3.0",
+    "@sapphire/async-queue": "^1.5.5",
+    "chalk": "^5.4.1",
     "tesseract.js": "^5.1.1",
-    "ws": "^8.18.0"
+    "ws": "^8.18.1"
   },
   "devDependencies": {
-    "@types/ws": "^8.5.12",
+    "@types/ws": "^8.18.1",
     "typed-emitter": "^2.1.0"
   }
 }

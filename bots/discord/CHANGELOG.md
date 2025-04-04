@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.0.0-dev.38](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0-dev.37...@revanced/discord-bot@1.0.0-dev.38) (2025-04-04)
+
+
+### Bug Fixes
+
+* run projects with `--bun` ([bb2182e](https://github.com/revanced/revanced-bots/commit/bb2182e707fa40c555d56138972eeea28f1b3cf9))
+
 # @revanced/discord-bot [1.0.0-dev.37](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0-dev.36...@revanced/discord-bot@1.0.0-dev.37) (2025-03-08)
 
 

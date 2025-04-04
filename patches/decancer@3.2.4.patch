@@ -1,0 +1,13 @@
+diff --git a/src/lib.js b/src/lib.js
+index de45d7dbe82975b09eff3742d0718accae2107fc..0575daa03dfabdd5c96928458ff4270cb8f7188a 100644
+--- a/src/lib.js
++++ b/src/lib.js
+@@ -42,7 +42,7 @@ function isMusl() {
+ }
+ 
+ function getBinding(name) {
+-  const path = join(__dirname, '..', `decancer.${name}.node`)
++  const path = join(import.meta.dir, '..', `decancer.${name}.node`)
+ 
+   return require(existsSync(path) ? path : `@vierofernando/decancer-${name}`)
+ }

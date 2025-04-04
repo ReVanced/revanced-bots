@@ -1,0 +1,38 @@
+{
+  "name": "@revanced/bot-shared",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "🙌🏻 Shared components for bots assisting ReVanced",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "bun bundle && bun types",
+    "watch": "conc --raw \"bun bundle:watch\" \"bun types:watch\"",
+    "bundle": "bun build src/index.ts --outdir=dist --sourcemap=external --target=bun --minify",
+    "bundle:watch": "bun run bundle --watch",
+    "types": "tsc --declaration --emitDeclarationOnly",
+    "types:watch": "bun types --watch --preserveWatchOutput",
+    "types:clean": "bun types --build --clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revanced/revanced-bots.git",
+    "directory": "packages/shared"
+  },
+  "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+  "contributors": [
+    "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+    "ReVanced <nosupport@revanced.app> (https://revanced.app)"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/revanced/revanced-bots/issues"
+  },
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
+  "dependencies": {
+    "bson": "^6.10.3",
+    "chalk": "^5.4.1",
+    "tracer": "^1.3.0",
+    "valibot": "^0.30.0"
+  }
+}

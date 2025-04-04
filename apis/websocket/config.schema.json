@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "address": {
+      "description": "Address to listen on",
+      "type": "string",
+      "default": "127.0.0.1"
+    },
+    "port": {
+      "description": "Port to listen on",
+      "type": "integer",
+      "default": 80
+    },
+    "ocrConcurrentQueues": {
+      "description": "Number of concurrent queues for OCR",
+      "type": "integer",
+      "default": 1
+    },
+    "logLevel": {
+      "description": "The log level to print to console",
+      "type": "string",
+      "enum": ["error", "warn", "info", "log", "debug", "trace", "none"],
+      "default": "info"
+    }
+  }
+}

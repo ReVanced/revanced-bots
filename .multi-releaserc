@@ -1,0 +1,4 @@
+{
+    "ignorePrivate": false,
+    "ignorePackages": ["packages/**"]
+}

@@ -1,0 +1,78 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Make sure the release step uses its own credentials:
+          # https://github.com/cycjimmy/semantic-release-action#private-packages
+          persist-credentials: false
+          fetch-depth: 0
+          
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: ${{ runner.os }}-bun-
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+              
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build packages
+        run: bun run build:packages
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: amd64, arm64
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and release
+        env:
+          RELEASE_WORKFLOW_STEP: release
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          DOCKER_REGISTRY_USER: ${{ github.repository_owner }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          DEBUG: semantic-release:*
+        run: bunx multi-semantic-release --debug
+
+        # We call multi-semantic-release twice to publish in a different step
+        # An environment variable determines which plugins in the config to run
+      - name: Trigger Portainer webhooks
+        if: github.ref == 'refs/heads/main'
+        env:
+          RELEASE_WORKFLOW_STEP: publish
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          WEBSOCKET_API_PORTAINER_WEBHOOK_URL: ${{ secrets.WEBSOCKET_API_PORTAINER_WEBHOOK_URL }}
+          DISCORD_BOT_PORTAINER_WEBHOOK_URL: ${{ secrets.DISCORD_BOT_PORTAINER_WEBHOOK_URL }}
+        run: bunx multi-semantic-release
+
+      - name: Purge outdated images
+        uses: snok/container-retention-policy@v3.0.0
+        with:
+          account: ${{ github.repository_owner }}
+          token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+          image-names: "revanced-bot-*"
+          keep-n-most-recent: 5
+          cut-off: 3M

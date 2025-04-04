@@ -1,0 +1,11 @@
+services:
+  websocket-api:
+    container_name: revanced-bot-websocket-api
+    image: ghcr.io/revanced/revanced-bot-websocket-api:latest
+    environment:
+      - WIT_AI_TOKEN=
+    volumes:
+      - /data/revanced-bot-websocket-api:/app
+    ports:
+      - 3000:3000
+    restart: unless-stopped

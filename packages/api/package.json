@@ -1,0 +1,37 @@
+{
+  "name": "@revanced/bot-api",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "🙌🏻 Programmatic API for bots assisting ReVanced to communicate to its API server",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "bun bundle && bun types",
+    "bundle": "bun build src/index.ts --outdir=dist --target=bun",
+    "types": "tsc --declaration --emitDeclarationOnly",
+    "types:clean": "bun types --build --clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revanced/revanced-bots.git",
+    "directory": "packages/api"
+  },
+  "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+  "contributors": [
+    "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+    "ReVanced <nosupport@revanced.app> (https://revanced.app)"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/revanced/revanced-bots/issues"
+  },
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
+  "dependencies": {
+    "@revanced/bot-shared": "workspace:*",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1",
+    "typed-emitter": "^2.1.0"
+  }
+}

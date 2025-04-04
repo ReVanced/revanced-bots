@@ -1,0 +1,9 @@
+services:
+  websocket-api:
+    container_name: revanced-bot-discord
+    image: ghcr.io/revanced/revanced-bot-discord:latest
+    volumes:
+      - /data/revanced-bot-discord:/app
+    ports:
+      - 3000:3000
+    restart: unless-stopped

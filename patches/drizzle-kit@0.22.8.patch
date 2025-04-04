@@ -1,0 +1,21 @@
+diff --git a/bin.cjs b/bin.cjs
+index 142ed9c20f28dc1080bebfb52325fa308c6cb771..9d3bea0787f6c05df11567c6821bc85743286340 100644
+--- a/bin.cjs
++++ b/bin.cjs
+@@ -22053,7 +22053,7 @@ var init_sqliteImports = __esm({
+       const { unregister } = await safeRegister();
+       for (let i2 = 0; i2 < imports.length; i2++) {
+         const it = imports[i2];
+-        const i0 = require(`${it}`);
++        const i0 = await import(`${it}`);
+         const prepared = prepareFromExports3(i0);
+         tables.push(...prepared.tables);
+       }
+@@ -129572,6 +129572,7 @@ var generateCommand = new Command("generate").option("--dialect <dialect>", "Dat
+   } else {
+     assertUnreachable(dialect7);
+   }
++  process.exit(0);
+ });
+ var migrateCommand = new Command("migrate").option(
+   "--config <config>",

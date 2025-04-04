@@ -1,23 +1,61 @@
 {
-  "name": "revanced-helper",
-  "version": "0.0.1",
-  "description": "The community bots (and the server) to help the community and make moderators job easy.",
+  "name": "revanced-bots",
+  "description": "🤖 Bots assisting ReVanced on multiple platforms",
+  "private": true,
+  "version": "0.0.0",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+  "workspaces": ["packages/*", "apis/*", "bots/*"],
+  "scripts": {
+    "build:all": "turbo run build",
+    "build:packages": "turbo build --filter=\"./packages/*\"",
+    "watch": "turbo run watch",
+    "flint": "biome check --write .",
+    "flint:check": "biome check .",
+    "clint": "commitlint --edit"
+  },
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reisxd/revanced-helper.git"
+    "url": "git+https://github.com/revanced/revanced-bots.git"
   },
-  "author": "Reis Can",
-  "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/reisxd/revanced-helper/issues"
+    "url": "https://github.com/revanced/revanced-bots/issues"
   },
-  "homepage": "https://github.com/reisxd/revanced-helper#readme",
-  "scripts": {
-    "lint": "prettier --write . && eslint --fix .",
-    "start": "cd apps/server/src && (node . &) && cd ../../bot-discord/src && (node .)"
-  },
+  "contributors": [
+    "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+    "ReVanced <nosupport@revanced.app> (https://revanced.app)"
+  ],
+  "packageManager": "bun@1.1.20",
   "devDependencies": {
-    "eslint": "^8.27.0",
-    "prettier": "2.7.1"
+    "@anolilab/multi-semantic-release": "^1.1.10",
+    "@biomejs/biome": "^1.9.4",
+    "@codedependant/semantic-release-docker": "^5.1.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@saithodev/semantic-release-backmerge": "^4.0.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@tsconfig/strictest": "^2.0.5",
+    "@types/bun": "^1.2.8",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "lefthook": "^1.11.6",
+    "portainer-service-webhook": "https://github.com/newarifrh/portainer-service-webhook#v1",
+    "semantic-release": "^24.2.3",
+    "turbo": "^2.5.0",
+    "typescript": "^5.8.2"
+  },
+  "trustedDependencies": [
+    "@biomejs/biome",
+    "@revanced/discord-bot",
+    "esbuild",
+    "lefthook"
+  ],
+  "patchedDependencies": {
+    "@semantic-release/npm@12.0.1": "patches/@semantic-release%2Fnpm@12.0.1.patch",
+    "drizzle-kit@0.22.8": "patches/drizzle-kit@0.22.8.patch",
+    "decancer@3.2.4": "patches/decancer@3.2.4.patch"
   }
 }

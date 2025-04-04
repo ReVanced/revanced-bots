@@ -1,0 +1,8 @@
+{
+  "$schema": "./config.schema.json",
+
+  "address": "127.0.0.1",
+  "port": 3000,
+  "ocrConcurrentQueues": 1,
+  "logLevel": "debug"
+}

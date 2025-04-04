@@ -1,0 +1,60 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "useLiteralKeys": {
+          "level": "off"
+        }
+      },
+      "style": {
+        "noNonNullAssertion": {
+          "level": "off"
+        },
+        "useEnumInitializers": {
+          "level": "off"
+        },
+        "useNodejsImportProtocol": {
+          "level": "off"
+        },
+        "useNumberNamespace": {
+          "level": "off"
+        }
+      }
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true,
+      "indentStyle": "space",
+      "indentWidth": 2
+    },
+    "parser": {
+      "allowComments": true
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "lineEnding": "crlf",
+      "arrowParentheses": "asNeeded",
+      "indentStyle": "space",
+      "indentWidth": 4,
+      "lineWidth": 120,
+      "quoteProperties": "asNeeded",
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "all"
+    }
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "include": ["*.js", "*.json", "*.ts"],
+    "ignore": ["dist/**/*", "node_modules/**/*"]
+  }
+}

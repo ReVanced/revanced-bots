@@ -1,0 +1,40 @@
+{
+  "name": "@revanced/bot-websocket-api",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0-dev.11",
+  "description": "🧦 WebSocket API server for bots assisting ReVanced",
+  "main": "dist/index.js",
+  "scripts": {
+    "bundle": "bun run scripts/build.ts",
+    "dev": "bun run src/index.ts --watch",
+    "build": "bun bundle",
+    "watch": "bun dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revanced/revanced-bots.git",
+    "directory": "apis/websocket"
+  },
+  "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+  "contributors": [
+    "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+    "ReVanced <nosupport@revanced.app> (https://revanced.app)"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/revanced/revanced-bots/issues"
+  },
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
+  "dependencies": {
+    "@revanced/bot-shared": "workspace:*",
+    "@sapphire/async-queue": "^1.5.5",
+    "chalk": "^5.4.1",
+    "tesseract.js": "^5.1.1",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1",
+    "typed-emitter": "^2.1.0"
+  }
+}

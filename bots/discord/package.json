@@ -1,0 +1,46 @@
+{
+  "name": "@revanced/discord-bot",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0-dev.38",
+  "description": "🤖 Discord bot assisting ReVanced",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun prepare && bun run src/index.ts",
+    "dev": "bun prepare && bun --watch src/index.ts",
+    "build": "bun prepare && bun run scripts/build.ts",
+    "watch": "bun dev",
+    "prepare": "bun run scripts/generate-indexes.ts && bunx --bun drizzle-kit generate --name=schema"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revanced/revanced-bots.git",
+    "directory": "bots/discord"
+  },
+  "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+  "contributors": [
+    "Palm <contact@palmdevs.me> (https://palmdevs.me)",
+    "ReVanced <nosupport@revanced.app> (https://revanced.app)"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/revanced/revanced-bots/issues"
+  },
+  "homepage": "https://github.com/revanced/revanced-bots#readme",
+  "dependencies": {
+    "@discordjs/builders": "^1.10.1",
+    "@discordjs/rest": "^2.4.3",
+    "@revanced/bot-api": "workspace:*",
+    "@revanced/bot-shared": "workspace:*",
+    "chalk": "^5.4.1",
+    "decancer": "^3.2.8",
+    "discord.js": "^14.18.0",
+    "drizzle-orm": "^0.31.4",
+    "parse-duration": "^1.1.2"
+  },
+  "devDependencies": {
+    "@libsql/client": "^0.7.0",
+    "discord-api-types": "^0.37.119",
+    "drizzle-kit": "^0.22.8"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "composite": false,
+    "exactOptionalPropertyTypes": false,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "paths": {
+      "$/*": ["./src/*"],
+      "$constants": ["./src/constants"],
+      "$utils/*": ["./src/utils/*"],
+      "$classes": ["./src/classes/index.ts"],
+      "$classes/*": ["./src/classes/*"],
+      "$commands": ["./src/commands/index.ts"],
+      "$commands/*": ["./src/commands/*"]
+    },
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "transform": "typescript-transform-path-rewrite"
+      }
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "./config.schema.ts",
+    "./drizzle.config.ts"
+  ],
+  "include": ["./src/**/*.ts", "./scripts/**/*.ts"]
+}

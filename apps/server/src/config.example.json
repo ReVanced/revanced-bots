@@ -1,9 +1,0 @@
-{
-    "regexSupport": false,
-    "regexResponses": [
-        {
-            "label": "videobuffer",
-            "regex": "insert regex here"
-        }
-    ]
-}

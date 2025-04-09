@@ -1,3 +1,10 @@
+## @revanced/bot-websocket-api [1.0.1](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.0...@revanced/bot-websocket-api@1.0.1) (2025-04-09)
+
+
+### Bug Fixes
+
+* **bots/discord:** attempt to fix sticky messages again ([7564b1a](https://github.com/revanced/revanced-bots/commit/7564b1a8f066183df390887ddfd4d73e0baa87ac))
+
 # @revanced/bot-websocket-api 1.0.0 (2025-04-04)
 
 

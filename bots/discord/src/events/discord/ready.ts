@@ -45,11 +45,11 @@ export default withContext(on, 'ready', async ({ config, discord, logger }, clie
 
                         if (!forced)
                             logger.debug(
-                                `Timeout ended for sticky message in channel ${channelId} in guild ${guildId}, channel is inactive`,
+                                `Timer ended for sticky message in channel ${channelId} in guild ${guildId}, channel is inactive`,
                             )
                         else
                             logger.debug(
-                                `Forced send timeout for sticky message in channel ${channelId} in guild ${guildId} ended, channel is too active`,
+                                `Force timer for sticky message in channel ${channelId} in guild ${guildId} hasn't ended but a message was sent, channel is too active`,
                             )
 
                         logger.debug(`Sent sticky message to channel ${channelId} in guild ${guildId}`)

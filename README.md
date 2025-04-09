@@ -58,7 +58,7 @@
    Continuing the legacy of Vanced
 </p>
 
-# 🤖 ReVanced Helper
+# 🤖 ReVanced Bots
 
 Bots assisting ReVanced on multiple platforms.
 

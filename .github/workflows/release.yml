@@ -51,9 +51,9 @@ jobs:
       - name: Build and release
         env:
           RELEASE_WORKFLOW_STEP: release
-          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOCKER_REGISTRY_USER: ${{ github.repository_owner }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: semantic-release:*
         run: bunx multi-semantic-release --debug
 
@@ -63,7 +63,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         env:
           RELEASE_WORKFLOW_STEP: publish
-          GITHUB_TOKEN: ${{ secrets.REPOSITORY_PUSH_ACCESS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WEBSOCKET_API_PORTAINER_WEBHOOK_URL: ${{ secrets.WEBSOCKET_API_PORTAINER_WEBHOOK_URL }}
           DISCORD_BOT_PORTAINER_WEBHOOK_URL: ${{ secrets.DISCORD_BOT_PORTAINER_WEBHOOK_URL }}
         run: bunx multi-semantic-release

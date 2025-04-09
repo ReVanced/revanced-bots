@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.0.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.2...@revanced/discord-bot@1.0.3) (2025-04-09)
+
+
+### Bug Fixes
+
+* **bots/discord:** attempt to fix sticky messages one last time ([65288ec](https://github.com/revanced/revanced-bots/commit/65288ec4242b32d0b5e213b3d7af602bb9a829ca))
+
 ## @revanced/discord-bot [1.0.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.1...@revanced/discord-bot@1.0.2) (2025-04-09)
 
 ## @revanced/discord-bot [1.0.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.0...@revanced/discord-bot@1.0.1) (2025-04-09)

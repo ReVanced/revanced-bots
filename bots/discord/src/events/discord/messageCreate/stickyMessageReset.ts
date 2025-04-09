@@ -31,8 +31,13 @@ withContext(on, 'messageCreate', async ({ discord, logger }, msg) => {
                         store.forceTimerMs,
                     ) as NodeJS.Timeout
                 else store.forceTimer.refresh()
-                // Force timer is already active, so we force send
-            } else store.send()
+            } else {
+                // Force timer is already active, so we clear the force timer
+                store.forceTimerActive = false
+                clearTimeout(store.forceTimer)
+                // and force send
+                store.send(true)
+            }
         }
     } else if (!store.forceTimerActive) {
         // Both timers aren't active, so we start the timer

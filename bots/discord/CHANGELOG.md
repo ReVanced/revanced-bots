@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.1.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.4...@revanced/discord-bot@1.1.0) (2025-04-14)
+
+
+### Features
+
+* **bots/discord:** delete and send sticky msg concurrently, add more logging ([247a00f](https://github.com/revanced/revanced-bots/commit/247a00f57fc2a45fe828cc41e6f0e38e67e83a20))
+
 ## @revanced/discord-bot [1.0.4](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.3...@revanced/discord-bot@1.0.4) (2025-04-14)
 
 

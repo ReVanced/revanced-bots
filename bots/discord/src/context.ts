@@ -101,7 +101,7 @@ export const discord = {
                 timerActive: boolean
                 timerMs: number
                 forceTimerMs?: number
-                send: (forced?: boolean) => Promise<void>
+                send: () => Promise<void>
                 currentMessage?: Message<true>
                 timer?: NodeJS.Timeout
                 forceTimer?: NodeJS.Timeout

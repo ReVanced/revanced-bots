@@ -25,39 +25,31 @@ export default withContext(on, 'ready', async ({ config, discord, logger }, clie
                         `Channel ${channelId} in guild ${guildId} is not a text channel, sticky messages will not be sent`,
                     )
 
-                const send = async (forced = false) => {
+                const send = async () => {
+                    const store = discord.stickyMessages[guildId]![channelId]
+                    if (!store) return
+
                     try {
-                        const msg = await channel.send({
+                        const oldMsg = store.currentMessage
+
+                        store.currentMessage = await channel.send({
                             ...message,
                             embeds: message.embeds?.map(it => applyCommonEmbedStyles(it, true, true, true)),
                         })
 
-                        const store = discord.stickyMessages[guildId]![channelId]
-                        if (!store) return
-
-                        await store.currentMessage?.delete().catch()
-                        store.currentMessage = msg
-
-                        // Clear any remaining timers
-                        clearTimeout(store.timer)
-                        clearTimeout(store.forceTimer)
-                        store.forceTimerActive = store.timerActive = false
-
-                        if (!forced)
-                            logger.debug(
-                                `Timer ended for sticky message in channel ${channelId} in guild ${guildId}, channel is inactive`,
-                            )
-                        else
-                            logger.debug(
-                                `Force timer for sticky message in channel ${channelId} in guild ${guildId} hasn't ended but a message was sent, channel is too active`,
-                            )
-
-                        logger.debug(`Sent sticky message to channel ${channelId} in guild ${guildId}`)
+                        await oldMsg?.delete()
                     } catch (e) {
                         logger.error(
                             `Error while sending sticky message to channel ${channelId} in guild ${guildId}:`,
                             e,
                         )
+                    } finally {
+                        // Clear any remaining timers
+                        clearTimeout(store.timer)
+                        clearTimeout(store.forceTimer)
+                        store.forceTimerActive = store.timerActive = false
+
+                        logger.debug(`Sent sticky message to channel ${channelId} in guild ${guildId}`)
                     }
                 }
 

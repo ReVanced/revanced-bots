@@ -1,3 +1,11 @@
+## @revanced/discord-bot [1.0.4](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.3...@revanced/discord-bot@1.0.4) (2025-04-14)
+
+
+### Bug Fixes
+
+* **bots/discord:** fix sticky messages logic again ([aa7501c](https://github.com/revanced/revanced-bots/commit/aa7501c3097a790265e4ea624d07c4a9c3c1b908))
+* **bots/discord:** remove expired presets from db if unapplying is not possible ([9d705e5](https://github.com/revanced/revanced-bots/commit/9d705e580c05d8b25df6f845d3aac747adaca116))
+
 ## @revanced/discord-bot [1.0.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.2...@revanced/discord-bot@1.0.3) (2025-04-09)
 
 

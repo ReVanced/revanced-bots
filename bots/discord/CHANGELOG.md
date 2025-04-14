@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.1.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.0...@revanced/discord-bot@1.1.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* **bots/discord:** fix sticky msg force timer always starting, add more logging ([cb4dc42](https://github.com/revanced/revanced-bots/commit/cb4dc42dfab8cf9821b03316cf56b405abd497ae))
+
 # @revanced/discord-bot [1.1.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.0.4...@revanced/discord-bot@1.1.0) (2025-04-14)
 
 

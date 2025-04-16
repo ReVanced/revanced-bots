@@ -1,3 +1,12 @@
+## @revanced/discord-bot [1.1.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.1...@revanced/discord-bot@1.1.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* **bots/discord/commands/admin/reload:** fix type error ([3908854](https://github.com/revanced/revanced-bots/commit/3908854fe090dda67b0d90225ab76f75e95db4c0))
+* **bots/discord/commands/moderation:** check if timeout amount is safe in role-preset commands ([0c1382c](https://github.com/revanced/revanced-bots/commit/0c1382c55856ed1e54c9e53dbb37e9297c5da37c))
+* **bots/discord:** replace use of deprecated `options.ephemeral` in replies ([31e5cf7](https://github.com/revanced/revanced-bots/commit/31e5cf7fc5c7cd0c6ca3b1f3b9410a88b95d8273))
+
 ## @revanced/discord-bot [1.1.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.0...@revanced/discord-bot@1.1.1) (2025-04-14)
 
 

@@ -78,7 +78,7 @@ export default new ModerationCommand({
             )
         }
 
-        if (expires)
+        if (Number.isSafeInteger(expires))
             setTimeout(() => {
                 removeRolePreset(member, preset)
             }, expires)

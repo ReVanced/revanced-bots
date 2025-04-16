@@ -63,7 +63,7 @@ export default new ModerationCommand({
             createModerationActionEmbed('Muted', user, executor.user, reason, Math.ceil(expires / 1000)),
         )
 
-        if (duration)
+        if (Number.isSafeInteger(expires))
             setTimeout(() => {
                 removeRolePreset(member, 'mute')
             }, duration)

@@ -11,7 +11,8 @@ export default new AdminCommand({
         logger.debug('Invalidating previous config...')
         context.config.invalidate()
 
-        if ((trigger as CommandInteraction).deferReply) await trigger.deferReply({ flags: MessageFlags.Ephemeral })
+        if ((trigger as CommandInteraction).deferReply)
+            await (trigger as CommandInteraction).deferReply({ flags: MessageFlags.Ephemeral })
 
         logger.info('Reinitializing API client to reload configuration...')
         await api.client.ws.setOptions(

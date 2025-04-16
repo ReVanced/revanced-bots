@@ -2,7 +2,7 @@ import { unlinkSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { inspect } from 'util'
 import { createContext, runInContext } from 'vm'
-import { ApplicationCommandOptionType } from 'discord.js'
+import { ApplicationCommandOptionType, MessageFlags } from 'discord.js'
 
 import { AdminCommand } from '$/classes/Command'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
@@ -85,8 +85,8 @@ export default new AdminCommand({
             })
 
         await trigger.reply({
-            ephemeral: true,
             embeds: [embed],
+            flags: MessageFlags.Ephemeral,
             files,
         })
 

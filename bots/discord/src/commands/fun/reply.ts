@@ -1,5 +1,5 @@
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
-import { ApplicationCommandOptionType, Message } from 'discord.js'
+import { ApplicationCommandOptionType, Message, MessageFlags } from 'discord.js'
 import { ModerationCommand } from '../../classes/Command'
 
 export default new ModerationCommand({
@@ -40,7 +40,7 @@ export default new ModerationCommand({
 
         await trigger.reply({
             content: 'OK!',
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     },
 })

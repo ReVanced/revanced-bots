@@ -56,6 +56,7 @@
   "patchedDependencies": {
     "@semantic-release/npm@12.0.1": "patches/@semantic-release%2Fnpm@12.0.1.patch",
     "drizzle-kit@0.22.8": "patches/drizzle-kit@0.22.8.patch",
-    "decancer@3.2.4": "patches/decancer@3.2.4.patch"
+    "decancer@3.2.4": "patches/decancer@3.2.4.patch",
+    "discord.js@14.18.0": "patches/discord.js@14.18.0.patch"
   }
 }

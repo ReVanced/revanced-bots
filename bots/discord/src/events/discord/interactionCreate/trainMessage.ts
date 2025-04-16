@@ -1,7 +1,6 @@
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
-
-import type { TextBasedChannel } from 'discord.js'
+import { MessageFlags, type TextBasedChannel } from 'discord.js'
 
 withContext(on, 'interactionCreate', async (context, interaction) => {
     const {
@@ -28,7 +27,7 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                         'Thank you for your contribution! Unfortunately, the message could not be found.',
                     ),
                 ],
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral,
             }))
 
         const selectedLabel = interaction.values[0]!
@@ -40,13 +39,13 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                     `Thank you for your contribution! The selected message is being trained as \`${selectedLabel}\`. 🎉`,
                 ),
             ],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     } catch (e) {
         logger.error('Failed to handle train message interaction:', e)
         await interaction.reply({
             embeds: [createStackTraceEmbed(e)],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     }
 })

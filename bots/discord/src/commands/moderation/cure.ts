@@ -1,6 +1,7 @@
 import { ModerationCommand } from '$/classes/Command'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
 import { cureNickname } from '$/utils/discord/moderation'
+import { MessageFlags } from 'discord.js'
 
 export default new ModerationCommand({
     name: 'cure',
@@ -18,7 +19,7 @@ export default new ModerationCommand({
         await cureNickname(member)
         await interaction.reply({
             embeds: [createSuccessEmbed(null, `Cured nickname for ${member.toString()}`)],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     },
 })

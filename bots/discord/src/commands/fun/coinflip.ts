@@ -1,4 +1,4 @@
-import { EmbedBuilder } from 'discord.js'
+import { EmbedBuilder, MessageFlags } from 'discord.js'
 
 import Command from '$/classes/Command'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
@@ -18,6 +18,7 @@ export default new Command({
         const reply = await trigger
             .reply({
                 embeds: [embed.toJSON()],
+                flags: MessageFlags.Ephemeral,
             })
             .then(it => it.fetch())
 

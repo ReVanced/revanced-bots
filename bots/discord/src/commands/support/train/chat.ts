@@ -2,7 +2,7 @@ import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
 import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
-import type { FetchMessageOptions, MessageResolvable } from 'discord.js'
+import { type FetchMessageOptions, MessageFlags, type MessageResolvable } from 'discord.js'
 import { config } from '../../../context'
 
 const msRcConfig = config.messageScan?.humanCorrections?.allow
@@ -70,7 +70,7 @@ export default new Command({
                     `The provided message has been trained as \`${label}\`. Thank you for your contribution!`,
                 ),
             ],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     },
 })

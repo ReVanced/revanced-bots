@@ -1,0 +1,17 @@
+# Make Message#reply work with { flags: MessageFlags.Ephemeral } in typings
+# So our Command system doesn't break
+diff --git a/typings/index.d.mts b/typings/index.d.mts
+index 645b870..fa93158 100644
+--- a/typings/index.d.mts
++++ b/typings/index.d.mts
+@@ -6764,8 +6764,8 @@ export interface MessageCreateOptions extends BaseMessageOptionsWithPoll {
+   stickers?: readonly StickerResolvable[];
+   flags?:
+     | BitFieldResolvable<
+-        Extract<MessageFlagsString, 'SuppressEmbeds' | 'SuppressNotifications'>,
+-        MessageFlags.SuppressEmbeds | MessageFlags.SuppressNotifications
++        Extract<MessageFlagsString, 'SuppressEmbeds' | 'SuppressNotifications' | 'Ephemeral'>,
++        MessageFlags.SuppressEmbeds | MessageFlags.SuppressNotifications | MessageFlags.Ephemeral
+       >
+     | undefined;
+ }

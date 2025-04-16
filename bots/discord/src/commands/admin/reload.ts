@@ -1,4 +1,5 @@
 import { AdminCommand } from '$/classes/Command'
+import { type CommandInteraction, MessageFlags } from 'discord.js'
 
 export default new AdminCommand({
     name: 'reload',
@@ -10,7 +11,7 @@ export default new AdminCommand({
         logger.debug('Invalidating previous config...')
         context.config.invalidate()
 
-        if ('deferReply' in trigger) await trigger.deferReply({ ephemeral: true })
+        if ((trigger as CommandInteraction).deferReply) await trigger.deferReply({ flags: MessageFlags.Ephemeral })
 
         logger.info('Reinitializing API client to reload configuration...')
         await api.client.ws.setOptions(

@@ -1,7 +1,7 @@
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
-import { type APIStringSelectComponent, ComponentType } from 'discord.js'
+import { type APIStringSelectComponent, ComponentType, MessageFlags } from 'discord.js'
 import { config } from '../../../context'
 
 const msRcConfig = config.messageScan?.humanCorrections?.allow
@@ -44,7 +44,7 @@ export default new Command({
                     type: ComponentType.ActionRow,
                 },
             ],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     },
 })

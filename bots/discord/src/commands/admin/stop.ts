@@ -1,4 +1,5 @@
 import { AdminCommand } from '$/classes/Command'
+import { MessageFlags } from 'discord.js'
 
 export default new AdminCommand({
     name: 'stop',
@@ -9,7 +10,7 @@ export default new AdminCommand({
         logger.fatal('Stopping bot...')
         trigger.reply({
             content: 'Stopping... (I will go offline once done)',
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
 
         if (!api.client.disconnected) api.client.disconnect()

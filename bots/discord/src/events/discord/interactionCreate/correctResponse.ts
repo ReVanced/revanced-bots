@@ -3,7 +3,12 @@ import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
 
-import type { ButtonInteraction, StringSelectMenuInteraction, TextBasedChannel } from 'discord.js'
+import {
+    type ButtonInteraction,
+    MessageFlags,
+    type StringSelectMenuInteraction,
+    type TextBasedChannel,
+} from 'discord.js'
 import { eq } from 'drizzle-orm'
 
 // No permission check required as it is already done when the user reacts to a bot response
@@ -26,7 +31,7 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
     if (!response)
         return void (await interaction.reply({
             content: "I don't recall having sent this response, so I cannot correct it.",
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         }))
 
     try {
@@ -91,7 +96,7 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
         logger.error('Failed to handle correct response interaction:', e)
         await interaction.reply({
             embeds: [createStackTraceEmbed(e)],
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
         })
     }
 })

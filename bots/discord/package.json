@@ -32,11 +32,11 @@
     "@discordjs/rest": "^2.4.3",
     "@revanced/bot-api": "workspace:*",
     "@revanced/bot-shared": "workspace:*",
+    "@sapphire/duration": "^1.2.0",
     "chalk": "^5.4.1",
     "decancer": "^3.2.8",
     "discord.js": "^14.18.0",
-    "drizzle-orm": "^0.31.4",
-    "parse-duration": "^1.1.2"
+    "drizzle-orm": "^0.31.4"
   },
   "devDependencies": {
     "@libsql/client": "^0.7.0",

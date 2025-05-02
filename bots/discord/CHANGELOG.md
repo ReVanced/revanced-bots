@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.2.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.2...@revanced/discord-bot@1.2.0) (2025-05-02)
+
+
+### Features
+
+* **bots/discord:** switch duration parser to `@sapphire/duration` ([04ce825](https://github.com/revanced/revanced-bots/commit/04ce8252c05a23dbb4a91fded4f1a3d63b5c8a64))
+
 ## @revanced/discord-bot [1.1.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.1...@revanced/discord-bot@1.1.2) (2025-04-16)
 
 

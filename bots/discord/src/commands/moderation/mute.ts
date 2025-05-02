@@ -3,7 +3,7 @@ import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createModerationActionEmbed } from '$/utils/discord/embeds'
 import { sendModerationReplyAndLogs } from '$/utils/discord/moderation'
 import { applyRolePreset, removeRolePreset } from '$/utils/discord/rolePresets'
-import { parseDuration } from '$/utils/duration'
+import { isSafeTimeoutDuration, parseDuration } from '$/utils/duration'
 
 export default new ModerationCommand({
     name: 'mute',
@@ -63,7 +63,7 @@ export default new ModerationCommand({
             createModerationActionEmbed('Muted', user, executor.user, reason, Math.ceil(expires / 1000)),
         )
 
-        if (Number.isSafeInteger(expires))
+        if (isSafeTimeoutDuration(duration))
             setTimeout(() => {
                 removeRolePreset(member, 'mute')
             }, duration)

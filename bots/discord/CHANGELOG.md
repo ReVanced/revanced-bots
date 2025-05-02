@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.2.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.0...@revanced/discord-bot@1.2.1) (2025-05-02)
+
+
+### Bug Fixes
+
+* **bots/discord:** fix timeout overflow check for role presets ([495f686](https://github.com/revanced/revanced-bots/commit/495f686292ebdcf51902c1dc75ac1510d7fdbd9c))
+
 # @revanced/discord-bot [1.2.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.1.2...@revanced/discord-bot@1.2.0) (2025-05-02)
 
 

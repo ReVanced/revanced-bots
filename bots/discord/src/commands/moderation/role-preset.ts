@@ -2,7 +2,7 @@ import { ModerationCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { sendPresetReplyAndLogs } from '$/utils/discord/moderation'
 import { applyRolePreset, removeRolePreset } from '$/utils/discord/rolePresets'
-import { parseDuration } from '$/utils/duration'
+import { isSafeTimeoutDuration, parseDuration } from '$/utils/duration'
 
 const SubcommandOptions = {
     member: {
@@ -78,7 +78,7 @@ export default new ModerationCommand({
             )
         }
 
-        if (Number.isSafeInteger(expires))
+        if (expires && isSafeTimeoutDuration(expires))
             setTimeout(() => {
                 removeRolePreset(member, preset)
             }, expires)

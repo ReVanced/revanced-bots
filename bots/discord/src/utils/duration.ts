@@ -23,3 +23,7 @@ export const durationToString = (duration: number) => {
         seconds ? `${seconds}s` : ''
     }`
 }
+
+export function isSafeTimeoutDuration(duration: number) {
+    return duration > 0 && duration < 2 ** 31 - 1
+}

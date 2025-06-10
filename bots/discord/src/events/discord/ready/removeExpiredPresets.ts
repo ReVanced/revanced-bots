@@ -9,7 +9,7 @@ import { type Client, DiscordAPIError } from 'discord.js'
 export default withContext(on, 'ready', async ({ config }, client) => {
     if (config.rolePresets) {
         removeExpiredPresets(client)
-        setTimeout(() => removeExpiredPresets(client), config.rolePresets.checkExpiredEvery)
+        setInterval(() => removeExpiredPresets(client), config.rolePresets.checkExpiredEvery)
     }
 })
 

@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.2.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.1...@revanced/discord-bot@1.2.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* **bots/discord:** use intervals for checking expired presets ([6e89b87](https://github.com/revanced/revanced-bots/commit/6e89b874cdfee8a1c215559271c741f43ba578ce))
+
 ## @revanced/discord-bot [1.2.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.0...@revanced/discord-bot@1.2.1) (2025-05-02)
 
 

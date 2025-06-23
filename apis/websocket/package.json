@@ -2,7 +2,7 @@
   "name": "@revanced/bot-websocket-api",
   "type": "module",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "🧦 WebSocket API server for bots assisting ReVanced",
   "main": "dist/index.js",
   "scripts": {

@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync } from 'fs'
 import { join } from 'path'
 import { Client as APIClient } from '@revanced/bot-api'
 import { createLogger } from '@revanced/bot-shared'
-import { Client as DiscordClient, type Message, Partials } from 'discord.js'
+import { Client as DiscordClient, type Message, Options, Partials } from 'discord.js'
 import { drizzle } from 'drizzle-orm/bun-sqlite'
 
 import * as schemas from './database/schemas'
@@ -80,6 +80,51 @@ export const discord = {
             parse: ['users'],
             repliedUser: true,
         },
+        sweepers: {
+            ...Options.DefaultSweeperSettings,
+            messages: {
+                interval: 1_800, // Every 30m
+                lifetime: 3_600, // Remove messages older than 1h
+            },
+        },
+        makeCache: Options.cacheWithLimits({
+            ...Options.DefaultMakeCacheSettings,
+            UserManager: 50,
+            GuildMemberManager: {
+                maxSize: 50,
+                // Always keep client guild member in cache
+                keepOverLimit: member => member.id === member.client.user.id,
+            },
+            ThreadManager: {
+                maxSize: 0,
+                // Always keep threads that are used for moderation logging
+                keepOverLimit: thread => config.moderation?.log?.thread === thread.id,
+            },
+            GuildMessageManager: {
+                maxSize: 0,
+                // Always keep messages posted by the client in cache
+                keepOverLimit: message => message.author.id === message.client.user.id,
+            },
+            // Unneeded cache
+            MessageManager: 0,
+            ReactionManager: 0,
+            VoiceStateManager: 0,
+            ThreadMemberManager: 0,
+            StageInstanceManager: 0,
+            ReactionUserManager: 0,
+            PresenceManager: 0,
+            GuildTextThreadManager: 0,
+            GuildStickerManager: 0,
+            DMMessageManager: 0,
+            GuildEmojiManager: 0,
+            GuildBanManager: 0,
+            GuildScheduledEventManager: 0,
+            EntitlementManager: 0,
+            AutoModerationRuleManager: 0,
+            GuildForumThreadManager: 0,
+            BaseGuildEmojiManager: 0,
+            GuildInviteManager: 0,
+        }),
         partials: [Partials.Message, Partials.Reaction, Partials.GuildMember],
     }),
     commands: Object.fromEntries(Object.values(commands).map(cmd => [cmd.name, cmd])) as Record<

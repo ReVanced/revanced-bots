@@ -1,15 +1,14 @@
-import { EventEmitter } from 'events'
 import {
     ClientOperation,
     DisconnectReason,
-    type Packet,
-    ServerOperation,
     deserializePacket,
     isClientPacket,
+    type Packet,
+    ServerOperation,
     serializePacket,
     uncapitalize,
 } from '@revanced/bot-shared'
-
+import { EventEmitter } from 'events'
 import type TypedEmitter from 'typed-emitter'
 import type { RawData, WebSocket } from 'ws'
 
@@ -100,7 +99,7 @@ export default class Client {
                     // @ts-expect-error TypeScript doesn't know that the above line will negate the type enough
                     packet,
                 )
-            } catch (e) {
+            } catch (_e) {
                 // TODO: add error fields to sent packet so we can log what went wrong
                 this.disconnect(DisconnectReason.InvalidPacket)
             }

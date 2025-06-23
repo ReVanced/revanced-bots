@@ -1,9 +1,9 @@
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
-import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
 import { type FetchMessageOptions, MessageFlags, type MessageResolvable } from 'discord.js'
 import { config } from '../../../context'
+import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
 
 const msRcConfig = config.messageScan?.humanCorrections?.allow
 

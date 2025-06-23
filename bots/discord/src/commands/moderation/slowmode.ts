@@ -1,8 +1,7 @@
-import { createSuccessEmbed } from '$/utils/discord/embeds'
-import { durationToString, parseDuration } from '$/utils/duration'
-
 import { ModerationCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
+import { createSuccessEmbed } from '$/utils/discord/embeds'
+import { durationToString, parseDuration } from '$/utils/duration'
 import { ChannelType } from 'discord.js'
 
 export default new ModerationCommand({

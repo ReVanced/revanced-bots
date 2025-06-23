@@ -2,9 +2,8 @@ import { database, logger } from '$/context'
 import { appliedPresets } from '$/database/schemas'
 import { on, withContext } from '$/utils/discord/events'
 import { removeRolePreset } from '$/utils/discord/rolePresets'
-import { and, eq, lt } from 'drizzle-orm'
-
 import { type Client, DiscordAPIError } from 'discord.js'
+import { and, eq, lt } from 'drizzle-orm'
 
 export default withContext(on, 'ready', async ({ config }, client) => {
     if (config.rolePresets) {

@@ -28,19 +28,19 @@
   },
   "homepage": "https://github.com/revanced/revanced-bots#readme",
   "dependencies": {
-    "@discordjs/builders": "^1.10.1",
-    "@discordjs/rest": "^2.4.3",
+    "@discordjs/builders": "^1.11.2",
+    "@discordjs/rest": "^2.5.1",
     "@revanced/bot-api": "workspace:*",
     "@revanced/bot-shared": "workspace:*",
     "@sapphire/duration": "^1.2.0",
     "chalk": "^5.4.1",
-    "decancer": "^3.2.8",
-    "discord.js": "^14.18.0",
-    "drizzle-orm": "^0.31.4"
+    "decancer": "^3.3.2",
+    "discord.js": "^14.20.0",
+    "drizzle-orm": "^0.44.2"
   },
   "devDependencies": {
-    "@libsql/client": "^0.7.0",
-    "discord-api-types": "^0.37.119",
-    "drizzle-kit": "^0.22.8"
+    "@libsql/client": "^0.15.9",
+    "discord-api-types": "^0.38.13",
+    "drizzle-kit": "^0.31.2"
   }
 }

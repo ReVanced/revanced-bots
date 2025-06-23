@@ -1,14 +1,10 @@
-import { inspect as inspectObject } from 'util'
-
-import Client from './classes/Client'
-
-import { type EventContext, parseImageEventHandler, parseTextEventHandler, trainMessageEventHandler } from './events'
-
 import { DisconnectReason, HumanizedDisconnectReason } from '@revanced/bot-shared'
-
 import { createServer } from 'http'
+import { inspect as inspectObject } from 'util'
 import { type WebSocket, WebSocketServer } from 'ws'
+import Client from './classes/Client'
 import { config, logger, tesseract, wit } from './context'
+import { type EventContext, parseImageEventHandler, parseTextEventHandler, trainMessageEventHandler } from './events'
 
 // Load config, init logger, check environment
 

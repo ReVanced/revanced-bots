@@ -1,7 +1,7 @@
 import * as BSON from 'bson'
 import { parse } from 'valibot'
-import type { Operation } from '../constants'
 import { type Packet, PacketSchema } from '../schemas'
+import type { Operation } from '../constants'
 
 /**
  * Compresses a packet into a buffer

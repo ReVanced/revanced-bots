@@ -1,8 +1,7 @@
 import { ApplicationCommandOptionType, ApplicationCommandType } from 'discord.js'
+import { config } from '../context'
 import { isAdmin } from '../utils/discord/permissions'
-
 import CommandError, { CommandErrorType } from './CommandError'
-
 import type {
     APIApplicationCommandChannelOption,
     CacheType,
@@ -20,7 +19,6 @@ import type {
     UserContextMenuCommandInteraction,
     UserResolvable,
 } from 'discord.js'
-import { config } from '../context'
 
 export enum CommandType {
     ChatGlobal = 1,

@@ -1,5 +1,4 @@
 import { type ClientOperation, ServerOperation } from '@revanced/bot-shared'
-
 import type { EventHandler } from '.'
 
 const trainMessageEventHandler: EventHandler<ClientOperation.TrainMessage> = async (packet, { wit, logger }) => {

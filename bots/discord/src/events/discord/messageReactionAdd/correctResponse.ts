@@ -1,7 +1,9 @@
 import { MessageScanLabeledResponseReactions as Reactions } from '$/constants'
+import { responses } from '$/database/schemas'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$/utils/discord/embeds'
 import { on, withContext } from '$/utils/discord/events'
-
+import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
+import { isAdmin } from '$/utils/discord/permissions'
 import {
     ActionRowBuilder,
     ButtonBuilder,
@@ -9,12 +11,8 @@ import {
     StringSelectMenuBuilder,
     StringSelectMenuOptionBuilder,
 } from 'discord.js'
-
-import type { ConfigMessageScanResponseLabelConfig } from '$/../config.schema'
-import { responses } from '$/database/schemas'
-import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
-import { isAdmin } from '$/utils/discord/permissions'
 import { eq } from 'drizzle-orm'
+import type { ConfigMessageScanResponseLabelConfig } from '$/../config.schema'
 
 const PossibleReactions = Object.values(Reactions) as string[]
 

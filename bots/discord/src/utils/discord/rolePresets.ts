@@ -1,7 +1,7 @@
 import { config, database } from '$/context'
 import { appliedPresets } from '$/database/schemas'
-import type { GuildMember } from 'discord.js'
 import { and, eq } from 'drizzle-orm'
+import type { GuildMember } from 'discord.js'
 
 // TODO: Fix this type
 type PresetKey = string

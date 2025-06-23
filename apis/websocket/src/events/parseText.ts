@@ -1,5 +1,4 @@
 import { type ClientOperation, ServerOperation } from '@revanced/bot-shared'
-
 import type { EventHandler } from '.'
 
 const parseTextEventHandler: EventHandler<ClientOperation.ParseText> = async (packet, { wit, logger }) => {

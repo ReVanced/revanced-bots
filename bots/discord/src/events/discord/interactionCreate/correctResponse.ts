@@ -2,7 +2,6 @@ import { responses } from '$/database/schemas'
 import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
-
 import {
     type ButtonInteraction,
     MessageFlags,

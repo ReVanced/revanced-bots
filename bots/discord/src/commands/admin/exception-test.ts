@@ -1,7 +1,6 @@
-import { ApplicationCommandOptionType } from 'discord.js'
-
 import { AdminCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
+import { ApplicationCommandOptionType } from 'discord.js'
 
 export default new AdminCommand({
     name: 'exception-test',

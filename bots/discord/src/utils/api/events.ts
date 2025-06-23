@@ -1,5 +1,5 @@
-import type { ClientWebSocketEvents } from '@revanced/bot-api'
 import * as context from '../../context'
+import type { ClientWebSocketEvents } from '@revanced/bot-api'
 
 const { client } = context.api
 

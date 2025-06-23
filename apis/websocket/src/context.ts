@@ -1,8 +1,7 @@
-import { OEM, createWorker as createTesseractWorker } from 'tesseract.js'
-
-import { join as joinPath } from 'path'
 import { createLogger } from '@revanced/bot-shared'
 import { exists as pathExists } from 'fs/promises'
+import { join as joinPath } from 'path'
+import { createWorker as createTesseractWorker, OEM } from 'tesseract.js'
 import { getConfig } from './utils/config'
 
 export const config = getConfig()

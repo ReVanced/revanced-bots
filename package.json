@@ -6,7 +6,11 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "author": "Palm <contact@palmdevs.me> (https://palmdevs.me)",
-  "workspaces": ["packages/*", "apis/*", "bots/*"],
+  "workspaces": [
+    "packages/*",
+    "apis/*",
+    "bots/*"
+  ],
   "scripts": {
     "build:all": "turbo run build",
     "build:packages": "turbo build --filter=\"./packages/*\"",
@@ -27,25 +31,25 @@
     "Palm <contact@palmdevs.me> (https://palmdevs.me)",
     "ReVanced <nosupport@revanced.app> (https://revanced.app)"
   ],
-  "packageManager": "bun@1.1.20",
+  "packageManager": "bun@1.2.17",
   "devDependencies": {
-    "@anolilab/multi-semantic-release": "^1.1.10",
-    "@biomejs/biome": "^1.9.4",
-    "@codedependant/semantic-release-docker": "^5.1.0",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@anolilab/multi-semantic-release": "^2.0.0",
+    "@biomejs/biome": "^2.0.5",
+    "@codedependant/semantic-release-docker": "^5.1.1",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@saithodev/semantic-release-backmerge": "^4.0.1",
     "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
     "@tsconfig/strictest": "^2.0.5",
-    "@types/bun": "^1.2.8",
-    "conventional-changelog-conventionalcommits": "^7.0.2",
-    "lefthook": "^1.11.6",
+    "@types/bun": "^1.2.17",
+    "conventional-changelog-conventionalcommits": "^9.0.0",
+    "lefthook": "^1.11.14",
     "portainer-service-webhook": "https://github.com/newarifrh/portainer-service-webhook#v1",
-    "semantic-release": "^24.2.3",
-    "turbo": "^2.5.0",
-    "typescript": "^5.8.2"
+    "semantic-release": "^24.2.5",
+    "turbo": "^2.5.4",
+    "typescript": "^5.8.3"
   },
   "trustedDependencies": [
     "@biomejs/biome",

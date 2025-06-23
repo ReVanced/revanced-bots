@@ -1,5 +1,5 @@
 import { Chalk, supportsColor, supportsColorStderr } from 'chalk'
-import { type Tracer, colorConsole, console as uncoloredConsole } from 'tracer'
+import { colorConsole, type Tracer, console as uncoloredConsole } from 'tracer'
 
 const chalk = new Chalk()
 const DefaultConfig = {

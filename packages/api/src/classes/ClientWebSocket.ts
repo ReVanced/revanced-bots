@@ -1,16 +1,16 @@
-import { EventEmitter } from 'events'
 import {
     type ClientOperation,
     DisconnectReason,
-    type Packet,
-    ServerOperation,
     deserializePacket,
     isServerPacket,
+    type Packet,
+    ServerOperation,
     serializePacket,
     uncapitalize,
 } from '@revanced/bot-shared'
-import type TypedEmitter from 'typed-emitter'
+import { EventEmitter } from 'events'
 import { type RawData, WebSocket } from 'ws'
+import type TypedEmitter from 'typed-emitter'
 
 /**
  * The class that handles the WebSocket connection to the server.

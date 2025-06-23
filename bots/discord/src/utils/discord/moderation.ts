@@ -1,7 +1,7 @@
 import { config, logger } from '$/context'
 import decancer from 'decancer'
-import type { CommandInteraction, EmbedBuilder, Guild, GuildMember, Message, User } from 'discord.js'
 import { applyReferenceToModerationActionEmbed, createModerationActionEmbed } from './embeds'
+import type { CommandInteraction, EmbedBuilder, Guild, GuildMember, Message, User } from 'discord.js'
 
 const PresetLogAction = {
     apply: 'Applied role preset to',

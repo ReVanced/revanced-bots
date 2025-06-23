@@ -1,18 +1,19 @@
 import {
-    url,
     type AnySchema,
-    type BooleanSchema,
-    type NullSchema,
-    type ObjectSchema,
-    type Output,
     array,
+    type BooleanSchema,
     boolean,
+    custom,
     enum_,
+    type InferOutput,
+    type NullSchema,
     null_,
+    type ObjectSchema,
     object,
     parse,
-    special,
+    pipe,
     string,
+    url,
     // merge
 } from 'valibot'
 import DisconnectReason from '../constants/DisconnectReason'
@@ -21,7 +22,7 @@ import { ClientOperation, Operation, ServerOperation } from '../constants/Operat
 /**
  * Schema to validate packets
  */
-export const PacketSchema = special<Packet>(input => {
+export const PacketSchema = custom<Packet>(input => {
     if (
         typeof input === 'object' &&
         input &&
@@ -51,7 +52,7 @@ export const PacketDataSchemas = {
         labels: array(
             object({
                 name: string(),
-                confidence: special<number>(input => typeof input === 'number' && input >= 0 && input <= 1),
+                confidence: custom<number>(input => typeof input === 'number' && input >= 0 && input <= 1),
             }),
         ),
     }),
@@ -70,7 +71,7 @@ export const PacketDataSchemas = {
         text: string(),
     }),
     [ClientOperation.ParseImage]: object({
-        image_url: string([url()]),
+        image_url: pipe(string(), url()),
     }),
     [ClientOperation.TrainMessage]: object({
         text: string(),
@@ -79,7 +80,7 @@ export const PacketDataSchemas = {
 } as const satisfies Record<
     Operation,
     // biome-ignore lint/suspicious/noExplicitAny: This is a schema, it's not possible to type it
-    ObjectSchema<any> | AnySchema | NullSchema | BooleanSchema
+    ObjectSchema<any, any> | AnySchema | NullSchema<any> | BooleanSchema<any>
 >
 
 export type Packet<TOp extends Operation = Operation> = TOp extends ServerOperation
@@ -88,6 +89,6 @@ export type Packet<TOp extends Operation = Operation> = TOp extends ServerOperat
 
 type PacketWithSequenceNumber<TOp extends Operation> = {
     op: TOp
-    d: Output<(typeof PacketDataSchemas)[TOp]>
+    d: InferOutput<(typeof PacketDataSchemas)[TOp]>
     s: number
 }

@@ -1,6 +1,20 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
-  "organizeImports": {
+  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              {
+                "type": false
+              }
+            ]
+          }
+        }
+      }
+    },
     "enabled": true
   },
   "linter": {
@@ -24,7 +38,15 @@
         },
         "useNumberNamespace": {
           "level": "off"
-        }
+        },
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },
@@ -54,7 +76,12 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "include": ["*.js", "*.json", "*.ts"],
-    "ignore": ["dist/**/*", "node_modules/**/*"]
+    "includes": [
+      "**/*.js",
+      "**/*.json",
+      "**/*.ts",
+      "!**/dist/**/*",
+      "!**/node_modules/**/*"
+    ]
   }
 }

@@ -1,16 +1,13 @@
 import { Database } from 'bun:sqlite'
-import { existsSync, readFileSync, readdirSync } from 'fs'
-import { join } from 'path'
 import { Client as APIClient } from '@revanced/bot-api'
 import { createLogger } from '@revanced/bot-shared'
 import { Client as DiscordClient, type Message, Options, Partials } from 'discord.js'
 import { drizzle } from 'drizzle-orm/bun-sqlite'
-
-import * as schemas from './database/schemas'
-
-import type { default as Command, CommandOptionsOptions, CommandType } from './classes/Command'
-
+import { existsSync, readdirSync, readFileSync } from 'fs'
+import { join } from 'path'
 import { __getConfig, config } from './config'
+import * as schemas from './database/schemas'
+import type { default as Command, CommandOptionsOptions, CommandType } from './classes/Command'
 export { config, __getConfig }
 
 export const logger = createLogger({

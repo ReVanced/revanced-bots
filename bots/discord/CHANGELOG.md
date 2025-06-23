@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.2.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.2...@revanced/discord-bot@1.2.3) (2025-06-23)
+
+
+### Bug Fixes
+
+* **bots/discord:** disable unneeded cache, enable message cache sweeping ([3a0f0fe](https://github.com/revanced/revanced-bots/commit/3a0f0fe7861d73a4d81ecaba0e12bd60c06f8eb8))
+
 ## @revanced/discord-bot [1.2.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.1...@revanced/discord-bot@1.2.2) (2025-06-10)
 
 

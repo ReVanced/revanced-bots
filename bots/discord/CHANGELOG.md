@@ -1,3 +1,15 @@
+# @revanced/discord-bot [1.4.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.3.0...@revanced/discord-bot@1.4.0) (2025-07-11)
+
+
+### Bug Fixes
+
+* **bots/discord:** pass non-empty out of scope label to discord ([fbd9480](https://github.com/revanced/revanced-bots/commit/fbd948003631b48a1914eb7b2551ead4b05089b7))
+
+
+### Features
+
+* **bots/discord:** react to label classified response ([96a9b83](https://github.com/revanced/revanced-bots/commit/96a9b83c486fdc6e78f4c59e197fa6c1dab09161))
+
 # @revanced/discord-bot [1.3.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.3...@revanced/discord-bot@1.3.0) (2025-07-11)
 
 

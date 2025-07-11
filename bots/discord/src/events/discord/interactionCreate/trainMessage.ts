@@ -1,4 +1,5 @@
 import { MessageFlags, type TextBasedChannel } from 'discord.js'
+import { OutOfScopeLabel } from '$/commands/support/train/context-menu'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
 
@@ -30,9 +31,11 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                 flags: MessageFlags.Ephemeral,
             }))
 
-        // If selectedLabel is empty, it means "out of scope", so we pass undefined
-        const selectedLabel = interaction.values[0] || undefined
-        await context.api.client.trainMessage(msg.content, selectedLabel)
+        const selectedLabel = interaction.values[0]
+        await context.api.client.trainMessage(
+            msg.content,
+            selectedLabel === OutOfScopeLabel ? undefined : selectedLabel,
+        )
         await interaction.reply({
             embeds: [
                 createSuccessEmbed(

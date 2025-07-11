@@ -39,7 +39,7 @@ export default new Command({
                             custom_id: `tr_${trigger.targetMessage.channelId}_${trigger.targetId}`,
                             options: [
                                 ...labels.map(label => ({ label, value: label })),
-                                { label: 'Out of scope', value: '', emoji: { name: '❌' } },
+                                { label: 'Out of scope', value: OutOfScopeLabel, emoji: { name: '❌' } },
                             ],
                             type: ComponentType.StringSelect,
                         } satisfies APIStringSelectComponent,
@@ -51,3 +51,5 @@ export default new Command({
         })
     },
 })
+
+export const OutOfScopeLabel = '<out of scope>'

@@ -23,12 +23,12 @@ export const wit = {
 
         if (!res.ok) throw new Error(`Failed to fetch from Wit.ai: ${res.statusText} (${res.status})`)
 
-        return await res.json()
+        return (await res.json()) as WitMessageResponse
     },
     message(text: string) {
         return this.fetch(`/message?q=${encodeURIComponent(text)}&n=8`) as Promise<WitMessageResponse>
     },
-    async train(text: string, label: string) {
+    async train(text: string, label?: string) {
         await this.fetch('/utterances', {
             body: JSON.stringify([
                 {
@@ -41,7 +41,14 @@ export const wit = {
             method: 'POST',
         })
     },
-} as const
+} satisfies Wit
+
+export interface Wit {
+    token: string
+    fetch(route: string, options?: RequestInit): Promise<WitMessageResponse>
+    message(text: string): Promise<WitMessageResponse>
+    train(text: string, label?: string): Promise<void>
+}
 
 export interface WitMessageResponse {
     text: string

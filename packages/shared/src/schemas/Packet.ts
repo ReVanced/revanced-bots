@@ -1,15 +1,12 @@
 import {
-    type AnySchema,
     array,
-    type BooleanSchema,
     boolean,
     custom,
     enum_,
     type InferOutput,
-    type NullSchema,
     null_,
-    type ObjectSchema,
     object,
+    optional,
     parse,
     pipe,
     string,
@@ -75,13 +72,9 @@ export const PacketDataSchemas = {
     }),
     [ClientOperation.TrainMessage]: object({
         text: string(),
-        label: string(),
+        label: optional(string()),
     }),
-} as const satisfies Record<
-    Operation,
-    // biome-ignore lint/suspicious/noExplicitAny: This is a schema, it's not possible to type it
-    ObjectSchema<any, any> | AnySchema | NullSchema<any> | BooleanSchema<any>
->
+} as const
 
 export type Packet<TOp extends Operation = Operation> = TOp extends ServerOperation
     ? PacketWithSequenceNumber<TOp>

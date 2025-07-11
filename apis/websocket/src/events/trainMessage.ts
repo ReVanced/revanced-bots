@@ -10,7 +10,7 @@ const trainMessageEventHandler: EventHandler<ClientOperation.TrainMessage> = asy
     const nextSeq = client.currentSequence++
     const actualText = text.slice(0, 279)
 
-    logger.debug(`${client.id} requested to train label ${label} (${nextSeq}) with:`, actualText)
+    logger.debug(`${client.id} requested to train label ${label ?? '<out of scope>'} (${nextSeq}) with:`, actualText)
 
     try {
         await wit.train(actualText, label)

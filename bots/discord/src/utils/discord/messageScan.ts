@@ -1,6 +1,6 @@
-import { type Response, responses } from '$/database/schemas'
 import { ButtonStyle, ComponentType } from 'discord.js'
 import { eq } from 'drizzle-orm'
+import { type Response, responses } from '$/database/schemas'
 import { createMessageScanResponseEmbed } from './embeds'
 import type { Config, ConfigMessageScanResponse, ConfigMessageScanResponseLabelConfig } from 'config.schema'
 import type { APIActionRowComponent, APIButtonComponent, Message, PartialUser, User } from 'discord.js'

@@ -1,6 +1,6 @@
+import { and, eq } from 'drizzle-orm'
 import { config, database } from '$/context'
 import { appliedPresets } from '$/database/schemas'
-import { and, eq } from 'drizzle-orm'
 import type { GuildMember } from 'discord.js'
 
 // TODO: Fix this type

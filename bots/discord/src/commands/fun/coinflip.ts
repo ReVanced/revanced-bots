@@ -1,6 +1,6 @@
+import { EmbedBuilder, MessageFlags } from 'discord.js'
 import Command from '$/classes/Command'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
-import { EmbedBuilder, MessageFlags } from 'discord.js'
 
 export default new Command({
     name: 'coinflip',

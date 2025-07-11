@@ -1,6 +1,6 @@
+import { type APIStringSelectComponent, ComponentType, MessageFlags } from 'discord.js'
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
-import { type APIStringSelectComponent, ComponentType, MessageFlags } from 'discord.js'
 import { config } from '../../../context'
 import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
 

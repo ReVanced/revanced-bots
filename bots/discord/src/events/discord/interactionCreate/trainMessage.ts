@@ -1,6 +1,6 @@
+import { MessageFlags, type TextBasedChannel } from 'discord.js'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
-import { MessageFlags, type TextBasedChannel } from 'discord.js'
 
 withContext(on, 'interactionCreate', async (context, interaction) => {
     const {

@@ -1,7 +1,7 @@
+import { EmbedBuilder } from 'discord.js'
 import { ModerationCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
-import { EmbedBuilder } from 'discord.js'
 
 export default new ModerationCommand({
     name: 'purge',

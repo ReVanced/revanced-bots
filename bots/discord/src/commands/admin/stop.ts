@@ -1,5 +1,5 @@
-import { AdminCommand } from '$/classes/Command'
 import { MessageFlags } from 'discord.js'
+import { AdminCommand } from '$/classes/Command'
 
 export default new AdminCommand({
     name: 'stop',

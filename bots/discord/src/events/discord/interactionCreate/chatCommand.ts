@@ -1,7 +1,7 @@
+import { MessageFlags } from 'discord.js'
 import CommandError from '$/classes/CommandError'
 import { createStackTraceEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
-import { MessageFlags } from 'discord.js'
 
 withContext(on, 'interactionCreate', async (context, interaction) => {
     if (!interaction.isChatInputCommand()) return

@@ -1,7 +1,3 @@
-import { responses } from '$/database/schemas'
-import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
-import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
-import { on, withContext } from '$utils/discord/events'
 import {
     type ButtonInteraction,
     MessageFlags,
@@ -9,6 +5,10 @@ import {
     type TextBasedChannel,
 } from 'discord.js'
 import { eq } from 'drizzle-orm'
+import { responses } from '$/database/schemas'
+import { handleUserResponseCorrection } from '$/utils/discord/messageScan'
+import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
+import { on, withContext } from '$utils/discord/events'
 
 // No permission check required as it is already done when the user reacts to a bot response
 withContext(on, 'interactionCreate', async (context, interaction) => {

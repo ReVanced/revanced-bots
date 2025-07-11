@@ -1,5 +1,5 @@
-import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { ApplicationCommandOptionType, Message, MessageFlags } from 'discord.js'
+import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { ModerationCommand } from '../../classes/Command'
 
 export default new ModerationCommand({

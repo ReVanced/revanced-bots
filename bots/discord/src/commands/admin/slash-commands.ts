@@ -1,7 +1,7 @@
+import { ApplicationCommandOptionType, Routes } from 'discord.js'
 import { AdminCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
-import { ApplicationCommandOptionType, Routes } from 'discord.js'
 
 const SubcommandOptions = {
     where: {

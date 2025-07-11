@@ -1,7 +1,7 @@
+import { MessageFlags } from 'discord.js'
 import { ModerationCommand } from '$/classes/Command'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
 import { cureNickname } from '$/utils/discord/moderation'
-import { MessageFlags } from 'discord.js'
 
 export default new ModerationCommand({
     name: 'cure',

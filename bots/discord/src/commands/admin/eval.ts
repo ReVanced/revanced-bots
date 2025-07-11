@@ -1,11 +1,11 @@
-import { AdminCommand } from '$/classes/Command'
-import { createSuccessEmbed } from '$/utils/discord/embeds'
-import { parseDuration } from '$/utils/duration'
 import { ApplicationCommandOptionType, MessageFlags } from 'discord.js'
 import { unlinkSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { inspect } from 'util'
 import { createContext, runInContext } from 'vm'
+import { AdminCommand } from '$/classes/Command'
+import { createSuccessEmbed } from '$/utils/discord/embeds'
+import { parseDuration } from '$/utils/duration'
 
 export default new AdminCommand({
     name: 'eval',

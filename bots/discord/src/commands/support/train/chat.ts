@@ -1,7 +1,7 @@
+import { type FetchMessageOptions, MessageFlags, type MessageResolvable } from 'discord.js'
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createSuccessEmbed } from '$/utils/discord/embeds'
-import { type FetchMessageOptions, MessageFlags, type MessageResolvable } from 'discord.js'
 import { config } from '../../../context'
 import type { ConfigMessageScanResponseLabelConfig } from 'config.schema'
 

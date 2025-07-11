@@ -1,5 +1,5 @@
-import { DefaultEmbedColor, ReVancedLogoURL } from '$/constants'
 import { type APIEmbed, EmbedBuilder, type EmbedField, type JSONEncodable, type User } from 'discord.js'
+import { DefaultEmbedColor, ReVancedLogoURL } from '$/constants'
 import type { ConfigMessageScanResponseMessage } from '../../../config.schema'
 
 export const createErrorEmbed = (title: string | null, description?: string) =>

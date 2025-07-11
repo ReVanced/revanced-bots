@@ -1,5 +1,5 @@
-import { api, discord, logger } from '$/context'
 import { getMissingEnvironmentVariables } from '@revanced/bot-shared'
+import { api, discord, logger } from '$/context'
 
 import './events/register'
 

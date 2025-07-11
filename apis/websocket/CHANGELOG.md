@@ -1,3 +1,10 @@
+# @revanced/bot-websocket-api [1.1.0](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.2...@revanced/bot-websocket-api@1.1.0) (2025-07-11)
+
+
+### Features
+
+* **apis/websocket:** support training without label ([670cc70](https://github.com/revanced/revanced-bots/commit/670cc700570b32924738c3f24acb9f5312d2dcdb))
+
 ## @revanced/bot-websocket-api [1.0.2](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.1...@revanced/bot-websocket-api@1.0.2) (2025-06-23)
 
 ## @revanced/bot-websocket-api [1.0.1](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.0...@revanced/bot-websocket-api@1.0.1) (2025-04-09)

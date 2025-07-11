@@ -63,8 +63,8 @@ withContext(on, 'messageReactionAdd', async (context, rct, user) => {
 
     logger.debug(`User ${user.id} is trying to correct the response ${rct.message.id}`)
 
-    const handleCorrection = (label: string) =>
-        handleUserResponseCorrection(context, response, reactionMessage, label, user)
+    const handleCorrection = (label?: string) =>
+        handleUserResponseCorrection(context, response, reactionMessage, user, label)
 
     try {
         if (reaction.emoji.name === Reactions.train) {
@@ -106,7 +106,7 @@ withContext(on, 'messageReactionAdd', async (context, rct, user) => {
                         .setCustomId(`${componentPrefix}_cancel`),
                     new ButtonBuilder()
                         .setEmoji(Reactions.delete)
-                        .setLabel('Delete (mark as false positive)')
+                        .setLabel('Delete (mark as out of scope)')
                         .setStyle(ButtonStyle.Danger)
                         .setCustomId(`${componentPrefix}_delete`),
                 ),
@@ -117,8 +117,8 @@ withContext(on, 'messageReactionAdd', async (context, rct, user) => {
                 components: rows,
             })
         } else if (reaction.emoji.name === Reactions.delete) {
-            await handleCorrection(msConfig.humanCorrections.falsePositiveLabel)
-            await user.send({ content: 'The response has been deleted and marked as a false positive.' })
+            await handleCorrection()
+            await user.send({ content: 'The response has been deleted and marked as out of scope.' })
         }
     } catch (e) {
         logger.error('Failed to correct response:', e)

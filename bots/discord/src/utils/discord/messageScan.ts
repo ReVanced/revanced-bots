@@ -17,7 +17,7 @@ export const getResponseFromText = async (
     type ResponseConfig = Awaited<ReturnType<typeof getResponseFromText>>
     let responseConfig: Omit<ResponseConfig, 'triggers'> & { triggers?: ResponseConfig['triggers'] } = {
         triggers: undefined,
-        response: null,
+        response: null!,
     }
 
     const firstLabelIndexes: number[] = []
@@ -143,15 +143,22 @@ export const handleUserResponseCorrection = async (
     { api, database: db, config: { messageScan: msConfig }, logger }: typeof import('$/context'),
     response: Response,
     reply: Message,
-    label: string,
     user: User | PartialUser,
+    label?: string,
 ) => {
+    if (!label) {
+        await Promise.all([reply.delete(), api.client.trainMessage(response.content, label)]).finally(() =>
+            logger.debug(`User ${user.id} trained message ${response.replyId} as out of scope`),
+        )
+
+        return
+    }
+
     const correctLabelResponse = msConfig!.responses!.find(r =>
         r.triggers.text!.some(t => 'label' in t && t.label === label),
     )
 
     if (!correctLabelResponse) throw new Error('Cannot find label config for the selected label')
-    if (!correctLabelResponse.response) return void (await reply.delete())
 
     if (response.label !== label) {
         db.update(responses)
@@ -168,12 +175,12 @@ export const handleUserResponseCorrection = async (
         }))
     }
 
-    await api.client.trainMessage(response.content, label)
-    logger.debug(`User ${user.id} trained message ${response.replyId} as ${label} (positive)`)
-
-    await reply.edit({
-        components: [],
-    })
+    await Promise.all([
+        api.client.trainMessage(response.content, label),
+        reply.edit({
+            components: [],
+        }),
+    ]).finally(() => logger.debug(`User ${user.id} trained message ${response.replyId} as ${label}`))
 }
 
 export const createMessageScanResponseComponents = (reply: Message<true>) => [

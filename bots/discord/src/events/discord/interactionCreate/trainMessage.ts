@@ -30,7 +30,8 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                 flags: MessageFlags.Ephemeral,
             }))
 
-        const selectedLabel = interaction.values[0]!
+        // If selectedLabel is empty, it means "out of scope", so we pass undefined
+        const selectedLabel = interaction.values[0] || undefined
         await context.api.client.trainMessage(msg.content, selectedLabel)
         await interaction.reply({
             embeds: [

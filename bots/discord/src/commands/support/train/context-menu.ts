@@ -37,7 +37,10 @@ export default new Command({
                     components: [
                         {
                             custom_id: `tr_${trigger.targetMessage.channelId}_${trigger.targetId}`,
-                            options: labels.map(label => ({ label, value: label })),
+                            options: [
+                                ...labels.map(label => ({ label, value: label })),
+                                { label: 'Out of scope', value: '', emoji: { name: '❌' } },
+                            ],
                             type: ComponentType.StringSelect,
                         } satisfies APIStringSelectComponent,
                     ],

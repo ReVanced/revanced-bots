@@ -9,7 +9,7 @@ const msRcConfig = config.messageScan?.humanCorrections?.allow
 
 export default new Command({
     name: 'train',
-    description: 'Train a specific message or text to a specific label',
+    description: 'Train a specific message to a specific label',
     type: Command.Type.ChatGuild,
     requirements: {
         users: msRcConfig?.users,
@@ -26,9 +26,9 @@ export default new Command({
             required: true,
         },
         label: {
-            description: 'The label to train the message as',
+            description: 'The label to train the message as (leave empty for out of scope)',
             type: Command.OptionType.String,
-            required: true,
+            required: false,
         },
     },
     allowMessageCommand: true,
@@ -49,7 +49,7 @@ export default new Command({
                 'This command can only be used in or on text channels',
             )
 
-        if (!labels.includes(label))
+        if (label && !labels.includes(label))
             throw new CommandError(
                 CommandErrorType.InvalidArgument,
                 `The provided label is invalid.\nValid labels are:${labels.map(l => `\n- \`${l}\``).join('')}`,
@@ -60,14 +60,14 @@ export default new Command({
         )
         if (!refMsg) throw new CommandError(CommandErrorType.InvalidArgument, 'The provided message does not exist.')
 
-        logger.debug(`User ${context.executor.id} is training message ${refMsg?.id} as ${label}`)
+        logger.debug(`User ${context.executor.id} is training message ${refMsg?.id} as ${label ?? 'out of scope'}`)
 
         await context.api.client.trainMessage(refMsg.content, label)
         await trigger.reply({
             embeds: [
                 createSuccessEmbed(
                     'Message trained',
-                    `The provided message has been trained as \`${label}\`. Thank you for your contribution!`,
+                    `The provided message has been trained as ${label ? `\`${label}\`` : 'out of scope'}. Thank you for your contribution!`,
                 ),
             ],
             flags: MessageFlags.Ephemeral,

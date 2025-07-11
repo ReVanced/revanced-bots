@@ -58,8 +58,8 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
 
         const editMessage = (content: string, description?: string) =>
             editInteractionMessage(interaction, msg.url, content, description)
-        const handleCorrection = (label: string) =>
-            handleUserResponseCorrection(context, response, msg, label, interaction.user)
+        const handleCorrection = (label?: string) =>
+            handleUserResponseCorrection(context, response, msg, interaction.user, label)
 
         if (response.correctedById)
             return await editMessage(
@@ -82,7 +82,7 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                     await editMessage('Canceled', 'You canceled this interaction. 😞')
                     break
                 case 'delete':
-                    await handleCorrection(msConfig.humanCorrections.falsePositiveLabel)
+                    await handleCorrection()
                     await editMessage(
                         'Marked as false positive',
                         'The response has been deleted and marked as a false positive. Thank you for your feedback. 🎉',

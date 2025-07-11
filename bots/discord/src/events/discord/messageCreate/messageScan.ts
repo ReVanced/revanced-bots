@@ -1,3 +1,4 @@
+import { MessageScanLabeledResponseReactions } from '$/constants'
 import { responses } from '$/database/schemas'
 import { getResponseFromText, messageMatchesFilter } from '$/utils/discord/messageScan'
 import { createMessageScanResponseEmbed } from '$utils/discord/embeds'
@@ -47,6 +48,8 @@ withContext(on, 'messageCreate', async (context, msg) => {
                         label,
                         content: msg.content,
                     })
+
+                    await Promise.all(Object.values(MessageScanLabeledResponseReactions).map(name => reply.react(name)))
                 }
             }
         } catch (e) {

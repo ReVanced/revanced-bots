@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.3.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.3...@revanced/discord-bot@1.3.0) (2025-07-11)
+
+
+### Features
+
+* **bots/discord:** support training without label ([c68cfd1](https://github.com/revanced/revanced-bots/commit/c68cfd1c01703fad17f233ad4e13cf81913afbb6))
+
 ## @revanced/discord-bot [1.2.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.2.2...@revanced/discord-bot@1.2.3) (2025-06-23)
 
 

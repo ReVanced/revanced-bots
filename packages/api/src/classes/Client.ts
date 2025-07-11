@@ -101,7 +101,7 @@ export default class Client {
         return packet
     }
 
-    async trainMessage(text: string, label: string) {
+    async trainMessage(text: string, label?: string) {
         this.#throwIfNotReady()
 
         this.ws.send({

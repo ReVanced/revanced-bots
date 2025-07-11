@@ -33,8 +33,8 @@
   ],
   "packageManager": "bun@1.2.17",
   "devDependencies": {
-    "@anolilab/multi-semantic-release": "^2.0.0",
-    "@biomejs/biome": "^2.0.5",
+    "@anolilab/multi-semantic-release": "^2.0.2",
+    "@biomejs/biome": "^2.1.1",
     "@codedependant/semantic-release-docker": "^5.1.1",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -43,11 +43,11 @@
     "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
     "@tsconfig/strictest": "^2.0.5",
-    "@types/bun": "^1.2.17",
-    "conventional-changelog-conventionalcommits": "^9.0.0",
-    "lefthook": "^1.11.14",
+    "@types/bun": "^1.2.18",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "lefthook": "^1.12.2",
     "portainer-service-webhook": "https://github.com/newarifrh/portainer-service-webhook#v1",
-    "semantic-release": "^24.2.5",
+    "semantic-release": "^24.2.6",
     "turbo": "^2.5.4",
     "typescript": "^5.8.3"
   },
@@ -58,9 +58,6 @@
     "lefthook"
   ],
   "patchedDependencies": {
-    "@semantic-release/npm@12.0.1": "patches/@semantic-release%2Fnpm@12.0.1.patch",
-    "drizzle-kit@0.22.8": "patches/drizzle-kit@0.22.8.patch",
-    "decancer@3.2.4": "patches/decancer@3.2.4.patch",
-    "discord.js@14.18.0": "patches/discord.js@14.18.0.patch"
+    "@semantic-release/npm@12.0.2": "patches/@semantic-release%2Fnpm@12.0.2.patch"
   }
 }

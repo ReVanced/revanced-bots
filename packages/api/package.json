@@ -28,7 +28,7 @@
   "homepage": "https://github.com/revanced/revanced-bots#readme",
   "dependencies": {
     "@revanced/bot-shared": "workspace:*",
-    "ws": "^8.18.2"
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@types/ws": "^8.18.1",

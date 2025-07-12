@@ -20,9 +20,7 @@ export const appliedPresets = sqliteTable(
         preset: text('preset').notNull(),
         until: integer('until'),
     },
-    table => ({
-        uniqueComposite: uniqueIndex('unique_composite').on(table.memberId, table.preset, table.guildId),
-    }),
+    table => [uniqueIndex('unique_composite').on(table.memberId, table.preset, table.guildId)],
 )
 
 export type Response = InferSelectModel<typeof responses>

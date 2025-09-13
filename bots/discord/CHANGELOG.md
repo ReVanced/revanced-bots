@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.5.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.4.1...@revanced/discord-bot@1.5.0) (2025-09-13)
+
+
+### Features
+
+* **bots/discord:** add additional options for `respondToReply` ([399c201](https://github.com/revanced/revanced-bots/commit/399c201f8c3e9e116050b49c2ffccdd79b02f39b))
+
 ## @revanced/discord-bot [1.4.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.4.0...@revanced/discord-bot@1.4.1) (2025-09-13)
 
 

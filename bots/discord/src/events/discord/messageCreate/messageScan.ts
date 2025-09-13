@@ -33,7 +33,7 @@ withContext(on, 'messageCreate', async (context, msg) => {
             if (response) {
                 logger.debug('Response found')
 
-                const toReply = (
+                const toReply = msg.reference?.messageId && (
                     respondToReply === true
                         ? true
                         : (respondToReply === 'only_labeled' && label !== undefined) ||

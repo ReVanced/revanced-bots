@@ -100,7 +100,7 @@ export const discord = {
             GuildMessageManager: {
                 maxSize: 0,
                 // Always keep messages posted by the client in cache
-                keepOverLimit: message => message.author.id === message.client.user.id,
+                keepOverLimit: message => message.author?.id === message.client.user.id,
             },
             // Unneeded cache
             MessageManager: 0,

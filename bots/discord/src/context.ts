@@ -122,7 +122,7 @@ export const discord = {
             BaseGuildEmojiManager: 0,
             GuildInviteManager: 0,
         }),
-        partials: [Partials.Message, Partials.Reaction, Partials.GuildMember],
+        partials: [Partials.Message, Partials.Reaction, Partials.GuildMember, Partials.User],
     }),
     commands: Object.fromEntries(Object.values(commands).map(cmd => [cmd.name, cmd])) as Record<
         string,

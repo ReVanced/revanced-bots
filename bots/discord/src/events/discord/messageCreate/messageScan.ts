@@ -33,7 +33,15 @@ withContext(on, 'messageCreate', async (context, msg) => {
             if (response) {
                 logger.debug('Response found')
 
-                const toReply = respondToReply ? (msg.reference?.messageId ? await msg.fetchReference() : msg) : msg
+                const toReply = (
+                    respondToReply === true
+                        ? true
+                        : (respondToReply === 'only_labeled' && label !== undefined) ||
+                          (respondToReply === 'only_regex' && label === undefined)
+                )
+                    ? await msg.fetchReference()
+                    : msg
+
                 const reply = await toReply.reply({
                     ...response,
                     embeds: response.embeds?.map(createMessageScanResponseEmbed),

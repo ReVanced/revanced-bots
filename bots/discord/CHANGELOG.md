@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.5.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.0...@revanced/discord-bot@1.5.1) (2025-09-13)
+
+
+### Bug Fixes
+
+* **bots/discord:** only fetch reference when it exists when `respondToReply` is set ([42038e6](https://github.com/revanced/revanced-bots/commit/42038e6b38983fefe79481359bad300dcb5e83b4))
+
 # @revanced/discord-bot [1.5.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.4.1...@revanced/discord-bot@1.5.0) (2025-09-13)
 
 

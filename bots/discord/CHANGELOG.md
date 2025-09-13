@@ -1,3 +1,12 @@
+## @revanced/discord-bot [1.4.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.4.0...@revanced/discord-bot@1.4.1) (2025-09-13)
+
+
+### Bug Fixes
+
+* **bots/discord/database:** use non-deprecated way to create indexes ([8cc2377](https://github.com/revanced/revanced-bots/commit/8cc2377cbfcc74c2c3228ed18da2495b4efd45aa))
+* **bots/discord:** allow partial users ([dd3e7d2](https://github.com/revanced/revanced-bots/commit/dd3e7d2ee0cdf40e083af7f6db35ac3508ddf763))
+* **bots/discord:** error in cache `keepOverLimit` comparison ([567c5d2](https://github.com/revanced/revanced-bots/commit/567c5d2c7f41dae7d7fec9946a7dd2ac1b10cc2a))
+
 # @revanced/discord-bot [1.4.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.3.0...@revanced/discord-bot@1.4.0) (2025-07-11)
 
 

@@ -33,14 +33,12 @@ withContext(on, 'messageCreate', async (context, msg) => {
             if (response) {
                 logger.debug('Response found')
 
-                const toReply = msg.reference?.messageId && (
-                    respondToReply === true
-                        ? true
-                        : (respondToReply === 'only_labeled' && label !== undefined) ||
-                          (respondToReply === 'only_regex' && label === undefined)
-                )
-                    ? await msg.fetchReference()
-                    : msg
+                const toReply =
+                    msg.reference?.messageId &&
+                    (respondToReply === true ||
+                        (label === undefined ? respondToReply === 'only_regex' : respondToReply === 'only_labeled'))
+                        ? await msg.fetchReference()
+                        : msg
 
                 const reply = await toReply.reply({
                     ...response,

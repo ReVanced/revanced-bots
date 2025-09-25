@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.5.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.1...@revanced/discord-bot@1.5.2) (2025-09-25)
+
+
+### Bug Fixes
+
+* **bots/discord:** correct `respondToReply` logic ([6fe1530](https://github.com/revanced/revanced-bots/commit/6fe15301a21fdc196fded8d6fb13236a7bb826f5))
+
 ## @revanced/discord-bot [1.5.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.0...@revanced/discord-bot@1.5.1) (2025-09-13)
 
 

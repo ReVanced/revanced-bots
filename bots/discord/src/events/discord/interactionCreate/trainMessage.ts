@@ -1,5 +1,4 @@
 import { MessageFlags, type TextBasedChannel } from 'discord.js'
-import { OutOfScopeLabel } from '$/commands/support/train/context-menu'
 import { createErrorEmbed, createStackTraceEmbed, createSuccessEmbed } from '$utils/discord/embeds'
 import { on, withContext } from '$utils/discord/events'
 

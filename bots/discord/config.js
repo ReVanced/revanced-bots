@@ -66,6 +66,7 @@ export default {
             },
         },
         humanCorrections: {
+            falsePositiveLabel: 'false_positive',
             allow: {
                 members: {
                     permissions: 8n,

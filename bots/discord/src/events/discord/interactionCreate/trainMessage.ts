@@ -30,11 +30,8 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
                 flags: MessageFlags.Ephemeral,
             }))
 
-        const selectedLabel = interaction.values[0]
-        await context.api.client.trainMessage(
-            msg.content,
-            selectedLabel === OutOfScopeLabel ? undefined : selectedLabel,
-        )
+        const selectedLabel = interaction.values[0]!
+        await context.api.client.trainMessage(msg.content, selectedLabel)
         await interaction.reply({
             embeds: [
                 createSuccessEmbed(

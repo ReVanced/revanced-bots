@@ -36,6 +36,7 @@ export type Config = {
             blacklist?: Filter
         }
         humanCorrections: {
+            falsePositiveLabel: string
             allow?: {
                 users?: string[]
                 members?: {
@@ -71,7 +72,7 @@ export type ConfigMessageScanResponse = {
         image?: Array<RegExp>
     }
     filterOverride?: NonNullable<Config['messageScan']>['filter']
-    response: ConfigMessageScanResponseMessage
+    response: ConfigMessageScanResponseMessage | null
     respondToReply?: boolean | 'only_regex' | 'only_labeled'
 }
 

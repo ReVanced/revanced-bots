@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.5.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.2...@revanced/discord-bot@1.5.3) (2026-01-17)
+
+
+### Bug Fixes
+
+* **bots/discord:** more logging during apply role preset on member join ([77626c9](https://github.com/revanced/revanced-bots/commit/77626c9aeddceb25c2f0d418bf764efc66669baf))
+
 ## @revanced/discord-bot [1.5.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.1...@revanced/discord-bot@1.5.2) (2025-09-25)
 
 

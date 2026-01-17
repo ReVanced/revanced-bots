@@ -62,7 +62,7 @@ export default new Command({
 
         logger.debug(`User ${context.executor.id} is training message ${refMsg?.id} as ${label ?? 'out of scope'}`)
 
-        await context.api.client.trainMessage(refMsg.content, label)
+        await context.api.client.trainRelevance(refMsg.content, label ? 'positive' : 'negative')
         await trigger.reply({
             embeds: [
                 createSuccessEmbed(

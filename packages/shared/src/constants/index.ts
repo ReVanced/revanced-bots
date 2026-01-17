@@ -1,3 +1,8 @@
+export { default as AnswerValidationAction } from './AnswerValidationAction'
+export { default as AnswerValidationLabel } from './AnswerValidationLabel'
 export { default as DisconnectReason } from './DisconnectReason'
 export { default as HumanizedDisconnectReason } from './HumanizedDisconnectReason'
+export { default as IntentClassificationAction } from './IntentClassificationAction'
+export { default as IntentClassificationLabel } from './IntentClassificationLabel'
 export * from './Operation'
+export { default as SkipReason } from './SkipReason'

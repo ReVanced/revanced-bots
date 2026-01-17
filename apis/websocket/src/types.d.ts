@@ -1,7 +1,7 @@
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
-            WIT_AI_TOKEN?: string
+            LLM_API_KEY?: string
         }
     }
 }

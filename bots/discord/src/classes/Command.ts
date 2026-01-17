@@ -320,21 +320,25 @@ export default class Command<
     async #resolveInteractionOptions(
         interaction: ChatInputCommandInteraction,
         options: readonly CommandInteractionOption[] = interaction.options.data,
+        optionsDef: CommandOptionsOptions | undefined = this.options,
     ) {
         const _options = {} as unknown
 
-        if (this.options)
-            for (const { name, type, value } of options) {
-                if (this.options[name]?.type !== type) return null
+        if (optionsDef)
+            for (const { name, type, value, options: optionOptions } of options) {
+                if (optionsDef[name]?.type !== type) return null
 
                 if (
                     type === ApplicationCommandOptionType.Subcommand ||
                     type === ApplicationCommandOptionType.SubcommandGroup
                 ) {
-                    const subOptions = Object.entries((this.options[name] as CommandSubcommandLikeOption).options)
-
+                    const subOptionsDef = (optionsDef[name] as CommandSubcommandLikeOption).options
                     // @ts-expect-error: Not smart enough, TypeScript :(
-                    _options[name] = await this.#resolveInteractionOptions(interaction, subOptions)
+                    _options[name] = await this.#resolveInteractionOptions(
+                        interaction,
+                        optionOptions ?? [],
+                        subOptionsDef,
+                    )
 
                     break
                 }
@@ -493,6 +497,24 @@ export class AdminCommand<
             },
             allowMessageCommand: options.allowMessageCommand ?? (true as AllowMessageCommand),
             type: CommandType.ChatGlobal,
+        })
+    }
+}
+
+export class GuildAdminCommand<
+    Options extends CommandOptionsOptions,
+    AllowMessageCommand extends boolean = true,
+> extends Command<CommandType.ChatGuild, Options, AllowMessageCommand> {
+    constructor(options: ExtendedCommandOptions<CommandType.ChatGuild, Options, AllowMessageCommand>) {
+        super({
+            ...options,
+            requirements: {
+                ...options.requirements,
+                adminOnly: true,
+                defaultCondition: 'pass',
+            },
+            allowMessageCommand: options.allowMessageCommand ?? (true as AllowMessageCommand),
+            type: CommandType.ChatGuild,
         })
     }
 }

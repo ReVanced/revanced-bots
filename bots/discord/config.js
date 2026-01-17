@@ -118,4 +118,9 @@ export default {
         disconnectLimit: 3,
         disconnectRetryInterval: 10000,
     },
+    conversationContext: {
+        enabled: true,
+        maxMessages: 6,
+        ttlMs: 1800000,
+    },
 }

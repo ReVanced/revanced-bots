@@ -32,9 +32,9 @@ withContext(on, 'interactionCreate', async (context, interaction) => {
             }))
 
         const selectedLabel = interaction.values[0]
-        await context.api.client.trainMessage(
+        await context.api.client.trainRelevance(
             msg.content,
-            selectedLabel === OutOfScopeLabel ? undefined : selectedLabel,
+            selectedLabel === OutOfScopeLabel ? 'negative' : 'positive',
         )
         await interaction.reply({
             embeds: [

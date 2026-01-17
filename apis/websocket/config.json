@@ -4,5 +4,60 @@
   "address": "127.0.0.1",
   "port": 3000,
   "ocrConcurrentQueues": 1,
-  "logLevel": "debug"
+  "logLevel": "debug",
+  "ai": {
+    "indexes": {
+      "documentation": "./indexes/documentation",
+      "qa": "./indexes/qa",
+      "productRelevance": "./indexes/product-relevance"
+    },
+    "embeddings": {
+      "modelPath": "Xenova/all-MiniLM-L6-v2",
+      "quant": "q8"
+    },
+    "intentClassification": {
+      "modelPath": "./models/intent-classification",
+      "quant": "q4",
+      "thresholds": {
+        "question": 0.7,
+        "problem": 0.7,
+        "complete": 0.7
+      }
+    },
+    "productRelevance": {
+      "threshold": 0.85
+    },
+    "answerValidation": {
+      "modelPath": "./models/answer-validation",
+      "quant": "q4",
+      "thresholds": {
+        "answer": 0.7,
+        "partial": 0.7,
+        "counter": 0.7,
+        "backchannel": 0.7
+      }
+    },
+    "llm": {
+      "enabled": false,
+      "baseURL": "",
+      "model": "",
+      "temperature": 0.7,
+      "systemPrompt": "You are a helpful assistant for ReVanced, an open-source project that provides patches for Android apps."
+    },
+    "rag": {
+      "confidence": {
+        "high": 0.9,
+        "medium": 0.3
+      },
+      "thresholds": {
+        "qa": 0.9,
+        "docs": 0.8
+      }
+    },
+    "documentParser": {
+      "maxChunkSize": 1000,
+      "chunkOverlap": 100,
+      "timeout": 30000
+    }
+  }
 }

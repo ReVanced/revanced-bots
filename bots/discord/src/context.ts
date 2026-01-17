@@ -1,6 +1,6 @@
 import { Database } from 'bun:sqlite'
 import { Client as APIClient } from '@revanced/bot-api'
-import { createLogger } from '@revanced/bot-shared'
+import { ContextBufferStore, createLogger } from '@revanced/bot-shared'
 import { Client as DiscordClient, type Message, Options, Partials } from 'discord.js'
 import { drizzle } from 'drizzle-orm/bun-sqlite'
 import { existsSync, readdirSync, readFileSync } from 'fs'
@@ -59,6 +59,17 @@ if (dbSchemaFileName) db.run(readFileSync(join(DatabaseSchemaDir, dbSchemaFileNa
 
 export const database = drizzle(db, {
     schema: schemas,
+})
+
+export const conversationContextConfig = {
+    enabled: config.conversationContext?.enabled!,
+    maxMessages: config.conversationContext?.maxMessages!,
+    ttlMs: config.conversationContext?.ttlMs!,
+}
+
+export const conversationContext = new ContextBufferStore({
+    maxMessages: conversationContextConfig.maxMessages,
+    ttlMs: conversationContextConfig.ttlMs,
 })
 
 export const discord = {

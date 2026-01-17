@@ -23,6 +23,15 @@ export const createSuccessEmbed = (title: string | null, description?: string) =
             .setColor('Green'),
     )
 
+export const createInfoEmbed = (title: string | null, description?: string) =>
+    applyCommonEmbedStyles(
+        new EmbedBuilder()
+            .setTitle(title)
+            .setDescription(description ?? null)
+            .setAuthor({ name: 'Info' })
+            .setColor('Blue'),
+    )
+
 export const createMessageScanResponseEmbed = (
     response: NonNullable<ConfigMessageScanResponseMessage['embeds']>[number],
 ) => applyCommonEmbedStyles(response, true, true, true)

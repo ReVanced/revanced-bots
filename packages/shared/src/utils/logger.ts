@@ -4,6 +4,11 @@ import { colorConsole, type Tracer, console as uncoloredConsole } from 'tracer'
 const chalk = new Chalk()
 const DefaultConfig = {
     dateformat: 'dd/mm/yyyy HH:mm:ss.sss Z',
+    preprocess: (data: { stack?: string }) => {
+        // huggingface library doesn't return this properly
+        // welp, that's for the case when models dont properly load
+        data.stack = data.stack || ''
+    },
     format: [
         '{{message}}',
         {

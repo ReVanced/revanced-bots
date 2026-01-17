@@ -3,8 +3,23 @@ import { createServer } from 'http'
 import { inspect as inspectObject } from 'util'
 import { type WebSocket, WebSocketServer } from 'ws'
 import Client from './classes/Client'
-import { config, logger, tesseract, wit } from './context'
-import { type EventContext, parseImageEventHandler, parseTextEventHandler, trainMessageEventHandler } from './events'
+import { ai, config, logger, tesseract } from './context'
+import {
+    addDocumentationEventHandler,
+    addDocumentationFromUrlEventHandler,
+    addQAEventHandler,
+    checkRelevanceEventHandler,
+    classifyIntentEventHandler,
+    type EventContext,
+    listDocsEventHandler,
+    parseImageEventHandler,
+    parseMessageEventHandler,
+    removeDocumentationEventHandler,
+    removeQAEventHandler,
+    searchDocsEventHandler,
+    trainRelevanceEventHandler,
+    validateAnswerEventHandler,
+} from './events'
 
 // Load config, init logger, check environment
 
@@ -19,15 +34,17 @@ if (!['development', 'production'].includes(environment)) {
 
 logger.info(`Running in ${environment} mode...`)
 
-if (!process.env['WIT_AI_TOKEN']) {
-    logger.error('WIT_AI_TOKEN is not defined in the environment variables')
-    process.exit(1)
-}
-
 // Handle uncaught exceptions
 
 process.on('uncaughtException', e => logger.error('Uncaught exception:', e))
 process.on('unhandledRejection', e => logger.error('Unhandled rejection:', e))
+
+try {
+    await ai.load()
+} catch (e) {
+    logger.error('Failed to initialize AI:', e)
+    process.exit(1)
+}
 
 // Server logic
 
@@ -37,7 +54,7 @@ const socketToClient = new WeakMap<WebSocket, Client>()
 const eventContext: EventContext = {
     tesseract,
     logger,
-    wit,
+    ai,
     config,
 }
 
@@ -86,9 +103,20 @@ wss.on('connection', async (socket, request) => {
             )
         })
 
-        client.on('parseText', packet => parseTextEventHandler(packet, eventContext))
+        // Register event handlers
+        client.on('parseMessage', packet => parseMessageEventHandler(packet, eventContext))
+        client.on('classifyIntent', packet => classifyIntentEventHandler(packet, eventContext))
+        client.on('validateAnswer', packet => validateAnswerEventHandler(packet, eventContext))
+        client.on('checkRelevance', packet => checkRelevanceEventHandler(packet, eventContext))
         client.on('parseImage', packet => parseImageEventHandler(packet, eventContext))
-        client.on('trainMessage', packet => trainMessageEventHandler(packet, eventContext))
+        client.on('searchDocs', packet => searchDocsEventHandler(packet, eventContext))
+        client.on('listDocs', packet => listDocsEventHandler(packet, eventContext))
+        client.on('addQA', packet => addQAEventHandler(packet, eventContext))
+        client.on('addDocumentation', packet => addDocumentationEventHandler(packet, eventContext))
+        client.on('addDocumentationFromUrl', packet => addDocumentationFromUrlEventHandler(packet, eventContext))
+        client.on('removeQA', packet => removeQAEventHandler(packet, eventContext))
+        client.on('removeDocumentation', packet => removeDocumentationEventHandler(packet, eventContext))
+        client.on('trainRelevance', packet => trainRelevanceEventHandler(packet, eventContext))
 
         if (['debug', 'trace'].includes(config.logLevel)) {
             logger.debug('Debug logs enabled, attaching debug events...')

@@ -61,9 +61,12 @@ export const getResponseFromText = async (
     // If none of the regexes match, we can search for labels immediately
     if (!responseConfig.triggers && !flags.textRegexesOnly) {
         logger.debug('No match from before regexes, doing NLP')
-        const scan = await api.client.parseText(content)
-        if (scan.labels.length) {
-            const matchedLabel = scan.labels[0]!
+        const scan = await api.client.classifyIntent(content)
+        const labels = Object.entries(scan.scores)
+            .map(([name, confidence]) => ({ name, confidence }))
+            .sort((a, b) => b.confidence - a.confidence)
+        if (labels.length) {
+            const matchedLabel = labels[0]!
             logger.debug(`Message matched label with confidence: ${matchedLabel.name}, ${matchedLabel.confidence}`)
 
             let trigger: ConfigMessageScanResponseLabelConfig | undefined
@@ -147,7 +150,8 @@ export const handleUserResponseCorrection = async (
     label?: string,
 ) => {
     if (!label) {
-        await Promise.all([reply.delete(), api.client.trainMessage(response.content, label)]).finally(() =>
+        // TODO: im not sure about this one, resolved temporarily
+        await Promise.all([reply.delete(), api.client.trainRelevance(response.content, 'negative')]).finally(() =>
             logger.debug(`User ${user.id} trained message ${response.replyId} as out of scope`),
         )
 
@@ -176,7 +180,8 @@ export const handleUserResponseCorrection = async (
     }
 
     await Promise.all([
-        api.client.trainMessage(response.content, label),
+        // TODO: im not sure about this one, resolved temporarily
+        api.client.trainRelevance(response.content, 'positive'),
         reply.edit({
             components: [],
         }),

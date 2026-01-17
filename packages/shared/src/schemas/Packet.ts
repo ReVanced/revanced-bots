@@ -1,20 +1,38 @@
 import {
-    array,
     boolean,
     custom,
-    enum_,
     type InferOutput,
     null_,
-    object,
-    optional,
     parse,
-    pipe,
-    string,
-    url,
     // merge
 } from 'valibot'
-import DisconnectReason from '../constants/DisconnectReason'
-import { ClientOperation, Operation, ServerOperation } from '../constants/Operation'
+import { ClientOperation, Operation, ServerOperation } from '../constants'
+import {
+    AddDocumentationDataSchema,
+    AddDocumentationFromUrlDataSchema,
+    AddQADataSchema,
+    CheckRelevanceDataSchema,
+    ClassifyIntentDataSchema,
+    ListDocsDataSchema,
+    ParseImageDataSchema,
+    ParseMessageDataSchema,
+    RemoveDocumentationDataSchema,
+    RemoveQADataSchema,
+    SearchDocsDataSchema,
+    TrainRelevanceDataSchema,
+    ValidateAnswerDataSchema,
+} from './client'
+import {
+    AddedDocumentationFromUrlDataSchema,
+    CheckedRelevanceDataSchema,
+    ClassifiedIntentDataSchema,
+    DisconnectDataSchema,
+    ListedDocsDataSchema,
+    ParsedImageDataSchema,
+    ParsedMessageDataSchema,
+    SearchedDocsDataSchema,
+    ValidatedAnswerDataSchema,
+} from './server'
 
 /**
  * Schema to validate packets
@@ -44,36 +62,50 @@ export const PacketSchema = custom<Packet>(input => {
  * Schema to validate packet data for each possible operations
  */
 export const PacketDataSchemas = {
+    /** Server operations */
     [ServerOperation.Hello]: null_(),
-    [ServerOperation.ParsedText]: object({
-        labels: array(
-            object({
-                name: string(),
-                confidence: custom<number>(input => typeof input === 'number' && input >= 0 && input <= 1),
-            }),
-        ),
-    }),
-    [ServerOperation.ParsedImage]: object({
-        text: string(),
-    }),
-    [ServerOperation.ParseTextFailed]: null_(),
+    [ServerOperation.ParsedMessage]: ParsedMessageDataSchema,
+    [ServerOperation.ParseMessageFailed]: null_(),
+    [ServerOperation.ClassifiedIntent]: ClassifiedIntentDataSchema,
+    [ServerOperation.ClassifyIntentFailed]: null_(),
+    [ServerOperation.ValidatedAnswer]: ValidatedAnswerDataSchema,
+    [ServerOperation.ValidateAnswerFailed]: null_(),
+    [ServerOperation.CheckedRelevance]: CheckedRelevanceDataSchema,
+    [ServerOperation.CheckRelevanceFailed]: null_(),
+    [ServerOperation.ParsedImage]: ParsedImageDataSchema,
     [ServerOperation.ParseImageFailed]: null_(),
-    [ServerOperation.Disconnect]: object({
-        reason: enum_(DisconnectReason),
-    }),
-    [ServerOperation.TrainedMessage]: boolean(),
-    [ServerOperation.TrainMessageFailed]: null_(),
+    [ServerOperation.SearchedDocs]: SearchedDocsDataSchema,
+    [ServerOperation.SearchDocsFailed]: null_(),
+    [ServerOperation.ListedDocs]: ListedDocsDataSchema,
+    [ServerOperation.ListDocsFailed]: null_(),
+    [ServerOperation.AddedQA]: boolean(),
+    [ServerOperation.AddQAFailed]: null_(),
+    [ServerOperation.AddedDocumentation]: boolean(),
+    [ServerOperation.AddDocumentationFailed]: null_(),
+    [ServerOperation.AddedDocumentationFromUrl]: AddedDocumentationFromUrlDataSchema,
+    [ServerOperation.AddDocumentationFromUrlFailed]: null_(),
+    [ServerOperation.RemovedQA]: boolean(),
+    [ServerOperation.RemoveQAFailed]: null_(),
+    [ServerOperation.RemovedDocumentation]: boolean(),
+    [ServerOperation.RemoveDocumentationFailed]: null_(),
+    [ServerOperation.TrainedRelevance]: boolean(),
+    [ServerOperation.TrainRelevanceFailed]: null_(),
+    [ServerOperation.Disconnect]: DisconnectDataSchema,
 
-    [ClientOperation.ParseText]: object({
-        text: string(),
-    }),
-    [ClientOperation.ParseImage]: object({
-        image_url: pipe(string(), url()),
-    }),
-    [ClientOperation.TrainMessage]: object({
-        text: string(),
-        label: optional(string()),
-    }),
+    /** Client operations */
+    [ClientOperation.ParseMessage]: ParseMessageDataSchema,
+    [ClientOperation.ClassifyIntent]: ClassifyIntentDataSchema,
+    [ClientOperation.ValidateAnswer]: ValidateAnswerDataSchema,
+    [ClientOperation.CheckRelevance]: CheckRelevanceDataSchema,
+    [ClientOperation.ParseImage]: ParseImageDataSchema,
+    [ClientOperation.SearchDocs]: SearchDocsDataSchema,
+    [ClientOperation.ListDocs]: ListDocsDataSchema,
+    [ClientOperation.AddQA]: AddQADataSchema,
+    [ClientOperation.AddDocumentation]: AddDocumentationDataSchema,
+    [ClientOperation.AddDocumentationFromUrl]: AddDocumentationFromUrlDataSchema,
+    [ClientOperation.RemoveQA]: RemoveQADataSchema,
+    [ClientOperation.RemoveDocumentation]: RemoveDocumentationDataSchema,
+    [ClientOperation.TrainRelevance]: TrainRelevanceDataSchema,
 } as const
 
 export type Packet<TOp extends Operation = Operation> = TOp extends ServerOperation

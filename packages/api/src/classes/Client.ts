@@ -33,19 +33,12 @@ export default class Client {
         return this.ready
     }
 
-    /**
-     * Requests the API to parse the given text
-     * @param text The text to parse
-     * @returns An object containing the ID of the request and the labels
-     */
-    async parseText(text: string) {
+    async parseMessage(text: string) {
         this.#throwIfNotReady()
 
         this.ws.send({
-            op: ClientOperation.ParseText,
-            d: {
-                text,
-            },
+            op: ClientOperation.ParseMessage,
+            d: { text },
         })
 
         // Since we don't have heartbeats anymore, this is fine.
@@ -53,18 +46,98 @@ export default class Client {
         // To fix this, we can try adding a instanced function that would return the currentSequence
         // and it would be updated every time a "heartbeat ack" packet is received
         const packet = await Promise.race([
-            this.#awaiter.await(ServerOperation.ParsedText, this.ws.currentSequence),
-            this.#awaiter.await(ServerOperation.ParseTextFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+            this.#awaiter.await(ServerOperation.ParsedMessage, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.ParseMessageFailed, this.ws.currentSequence, this.ws.timeout + 5000),
         ])
             .then(pkt => {
-                if (pkt.op === ServerOperation.ParsedText) return pkt.d
+                if (pkt.op === ServerOperation.ParsedMessage) return pkt.d
                 return null
             })
             .catch(() => {
-                throw new Error('Failed to parse text, the API did not respond in time')
+                throw new Error('Failed to parse message, the API did not respond in time')
             })
 
-        if (!packet) throw new Error('Failed to parse text, the API encountered an error')
+        if (!packet) throw new Error('Failed to parse message, the API encountered an error')
+        return packet
+    }
+
+    /**
+     * Requests the API to parse the given text
+     * @param text The text to parse
+     * @returns An object containing the ID of the request and the labels
+     */
+    async classifyIntent(text: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.ClassifyIntent,
+            d: { text },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.ClassifiedIntent, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.ClassifyIntentFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.ClassifiedIntent) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to classify intent, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to classify intent, the API encountered an error')
+        return packet
+    }
+
+    async validateAnswer(questionText: string, answerText: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.ValidateAnswer,
+            d: { questionText, answerText },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.ValidatedAnswer, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.ValidateAnswerFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.ValidatedAnswer) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to validate answer, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to validate answer, the API encountered an error')
+        return packet
+    }
+
+    async checkRelevance(text: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.CheckRelevance,
+            d: { text },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.CheckedRelevance, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.CheckRelevanceFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.CheckedRelevance) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to check relevance, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to check relevance, the API encountered an error')
         return packet
     }
 
@@ -78,13 +151,10 @@ export default class Client {
 
         this.ws.send({
             op: ClientOperation.ParseImage,
-            d: {
-                image_url: url,
-            },
+            d: { imageUrl: url },
         })
 
-        // See line 50
-
+        // See line 44
         const packet = await Promise.race([
             this.#awaiter.await(ServerOperation.ParsedImage, this.ws.currentSequence),
             this.#awaiter.await(ServerOperation.ParseImageFailed, this.ws.currentSequence, this.ws.timeout + 5000),
@@ -101,31 +171,220 @@ export default class Client {
         return packet
     }
 
-    async trainMessage(text: string, label?: string) {
+    async searchDocs(query: string, limit?: number) {
         this.#throwIfNotReady()
 
         this.ws.send({
-            op: ClientOperation.TrainMessage,
-            d: {
-                label,
-                text,
-            },
+            op: ClientOperation.SearchDocs,
+            d: { query, limit },
         })
 
-        // See line 50
+        // See line 44
         const packet = await Promise.race([
-            this.#awaiter.await(ServerOperation.TrainedMessage, this.ws.currentSequence),
-            this.#awaiter.await(ServerOperation.TrainMessageFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+            this.#awaiter.await(ServerOperation.SearchedDocs, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.SearchDocsFailed, this.ws.currentSequence, this.ws.timeout + 5000),
         ])
             .then(pkt => {
-                if (pkt.op === ServerOperation.TrainedMessage) return pkt.d
+                if (pkt.op === ServerOperation.SearchedDocs) return pkt.d
                 return null
             })
             .catch(() => {
-                throw new Error('Failed to train message, the API did not respond in time')
+                throw new Error('Failed to search docs, the API did not respond in time')
             })
 
-        if (!packet) throw new Error('Failed to train message, the API encountered an error')
+        if (!packet) throw new Error('Failed to search docs, the API encountered an error')
+        return packet
+    }
+
+    async listDocs(offset?: number, size?: number) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.ListDocs,
+            d: { offset, size },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.ListedDocs, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.ListDocsFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.ListedDocs) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to list docs, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to list docs, the API encountered an error')
+        return packet
+    }
+
+    async addQA(question: string, answer: string, url?: string, timestamp?: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.AddQA,
+            d: { question, answer, url, timestamp },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.AddedQA, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.AddQAFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.AddedQA) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to add QA, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to add QA, the API encountered an error')
+        return packet
+    }
+
+    async addDocumentation(text: string, url: string, title?: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.AddDocumentation,
+            d: { text, url, title },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.AddedDocumentation, this.ws.currentSequence),
+            this.#awaiter.await(
+                ServerOperation.AddDocumentationFailed,
+                this.ws.currentSequence,
+                this.ws.timeout + 5000,
+            ),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.AddedDocumentation) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to add documentation, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to add documentation, the API encountered an error')
+        return packet
+    }
+
+    /**
+     * Requests the API to fetch a document from a URL, parse it, chunk it, and add to the documentation index
+     * @param url The URL to fetch documentation from
+     * @returns An object containing the result of the operation including chunks added
+     */
+    async addDocumentationFromUrl(url: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.AddDocumentationFromUrl,
+            d: { url },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.AddedDocumentationFromUrl, this.ws.currentSequence),
+            this.#awaiter.await(
+                ServerOperation.AddDocumentationFromUrlFailed,
+                this.ws.currentSequence,
+                this.ws.timeout + 30000,
+            ), // Longer timeout for URL fetch
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.AddedDocumentationFromUrl) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to add documentation from URL, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to add documentation from URL, the API encountered an error')
+        return packet
+    }
+
+    async removeQA(id: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.RemoveQA,
+            d: { id },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.RemovedQA, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.RemoveQAFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.RemovedQA) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to remove QA, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to remove QA, the API encountered an error')
+        return packet
+    }
+
+    async removeDocumentation(id: string) {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.RemoveDocumentation,
+            d: { id },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.RemovedDocumentation, this.ws.currentSequence),
+            this.#awaiter.await(
+                ServerOperation.RemoveDocumentationFailed,
+                this.ws.currentSequence,
+                this.ws.timeout + 5000,
+            ),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.RemovedDocumentation) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to remove documentation, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to remove documentation, the API encountered an error')
+        return packet
+    }
+
+    async trainRelevance(text: string, type: 'positive' | 'negative') {
+        this.#throwIfNotReady()
+
+        this.ws.send({
+            op: ClientOperation.TrainRelevance,
+            d: { text, type },
+        })
+
+        // See line 44
+        const packet = await Promise.race([
+            this.#awaiter.await(ServerOperation.TrainedRelevance, this.ws.currentSequence),
+            this.#awaiter.await(ServerOperation.TrainRelevanceFailed, this.ws.currentSequence, this.ws.timeout + 5000),
+        ])
+            .then(pkt => {
+                if (pkt.op === ServerOperation.TrainedRelevance) return pkt.d
+                return null
+            })
+            .catch(() => {
+                throw new Error('Failed to train relevance, the API did not respond in time')
+            })
+
+        if (!packet) throw new Error('Failed to train relevance, the API encountered an error')
         return packet
     }
 

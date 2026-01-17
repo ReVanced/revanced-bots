@@ -22,6 +22,110 @@
       "type": "string",
       "enum": ["error", "warn", "info", "log", "debug", "trace", "none"],
       "default": "info"
+    },
+    "ai": {
+      "description": "AI configuration",
+      "type": "object",
+      "properties": {
+        "indexes": {
+          "description": "Vector store index paths",
+          "type": "object",
+          "properties": {
+            "documentation": { "type": "string" },
+            "qa": { "type": "string" },
+            "productRelevance": { "type": "string" }
+          }
+        },
+        "embeddings": {
+          "description": "Embeddings model configuration",
+          "type": "object",
+          "properties": {
+            "modelPath": { "type": "string" },
+            "quant": { "type": "string" }
+          }
+        },
+        "intentClassification": {
+          "description": "Intent classification model configuration",
+          "type": "object",
+          "properties": {
+            "modelPath": { "type": "string" },
+            "quant": { "type": "string" },
+            "thresholds": {
+              "type": "object",
+              "properties": {
+                "question": { "type": "number" },
+                "problem": { "type": "number" },
+                "complete": { "type": "number" }
+              }
+            }
+          }
+        },
+        "productRelevance": {
+          "description": "Product relevance configuration",
+          "type": "object",
+          "properties": {
+            "threshold": { "type": "number" }
+          }
+        },
+        "answerValidation": {
+          "description": "Answer validation model configuration",
+          "type": "object",
+          "properties": {
+            "modelPath": { "type": "string" },
+            "quant": { "type": "string" },
+            "thresholds": {
+              "type": "object",
+              "properties": {
+                "answer": { "type": "number" },
+                "partial": { "type": "number" },
+                "counter": { "type": "number" },
+                "backchannel": { "type": "number" }
+              }
+            }
+          }
+        },
+        "llm": {
+          "description": "LLM provider configuration",
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "baseURL": { "type": "string" },
+            "model": { "type": "string" },
+            "temperature": { "type": "number" },
+            "systemPrompt": { "type": "string" }
+          }
+        },
+        "rag": {
+          "description": "RAG configuration",
+          "type": "object",
+          "properties": {
+            "confidence": {
+              "type": "object",
+              "properties": {
+                "high": { "type": "number" },
+                "medium": { "type": "number" }
+              }
+            },
+            "thresholds": {
+              "type": "object",
+              "properties": {
+                "qa": { "type": "number" },
+                "docs": { "type": "number" },
+                "returnEmpty": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        "documentParser": {
+          "description": "Document parsing and chunking configuration",
+          "type": "object",
+          "properties": {
+            "maxChunkSize": { "type": "integer" },
+            "chunkOverlap": { "type": "integer" },
+            "timeout": { "type": "integer" }
+          }
+        }
+      }
     }
   }
 }

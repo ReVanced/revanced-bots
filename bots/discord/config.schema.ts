@@ -46,6 +46,11 @@ export type Config = {
         }
         responses: ConfigMessageScanResponse[]
     }
+    conversationContext?: {
+        enabled?: boolean
+        maxMessages?: number
+        ttlMs?: number
+    }
     logLevel: 'none' | 'error' | 'warn' | 'info' | 'log' | 'trace' | 'debug'
     api: {
         url: string

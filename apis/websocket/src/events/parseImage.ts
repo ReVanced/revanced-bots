@@ -10,7 +10,7 @@ const parseImageEventHandler: EventHandler<ClientOperation.ParseImage> = async (
 ) => {
     const {
         client,
-        d: { image_url: imageUrl },
+        d: { imageUrl },
     } = packet
 
     const nextSeq = client.currentSequence++

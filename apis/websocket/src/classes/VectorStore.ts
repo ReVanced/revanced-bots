@@ -58,7 +58,12 @@ export class VectorStore {
         text: string,
         topK = 25,
     ): Promise<{ qa: QueryResult<QAMetadata>[]; docs: QueryResult<DocumentationMetadata>[] } | undefined> {
-        if (!this.questionAnswerIndex || !this.documentationIndex) return
+        if (!this.questionAnswerIndex) {
+            throw new Error('QA index not loaded')
+        }
+        if (!this.documentationIndex) {
+            throw new Error('Documentation index not loaded')
+        }
 
         const vector = await this.embedder.embed(text)
         const [questionAnswerResults, documentationResults] = await Promise.all([
@@ -70,7 +75,9 @@ export class VectorStore {
     }
 
     async addQAItem(question: string, answer: string, url = '', timestamp = ''): Promise<void> {
-        if (!this.questionAnswerIndex) return
+        if (!this.questionAnswerIndex) {
+            throw new Error('QA index not loaded')
+        }
 
         await this.questionAnswerIndex.insertItem({
             vector: await this.embedder.embed(question),
@@ -79,7 +86,9 @@ export class VectorStore {
     }
 
     async addDocumentation(text: string, url: string, title = ''): Promise<void> {
-        if (!this.documentationIndex) return
+        if (!this.documentationIndex) {
+            throw new Error('Documentation index not loaded')
+        }
 
         await this.documentationIndex.insertItem({
             vector: await this.embedder.embed(text),
@@ -88,7 +97,9 @@ export class VectorStore {
     }
 
     async addPositiveRelevance(text: string): Promise<void> {
-        if (!this.productRelevanceIndex) return
+        if (!this.productRelevanceIndex) {
+            throw new Error('Product relevance index not loaded')
+        }
 
         await this.productRelevanceIndex.insertItem({
             vector: await this.embedder.embed(text),
@@ -97,7 +108,9 @@ export class VectorStore {
     }
 
     async addNegativeRelevance(text: string): Promise<void> {
-        if (!this.productRelevanceIndex) return
+        if (!this.productRelevanceIndex) {
+            throw new Error('Product relevance index not loaded')
+        }
 
         await this.productRelevanceIndex.insertItem({
             vector: await this.embedder.embed(text),
@@ -106,18 +119,38 @@ export class VectorStore {
     }
 
     async listQAItems(offset = 0, size = 100) {
-        const items = this.questionAnswerIndex?.listItems() ?? []
+        if (!this.questionAnswerIndex) {
+            throw new Error('QA index not loaded')
+        }
+
+        const items = this.questionAnswerIndex.listItems() ?? []
         return (await items).slice(offset, offset + size)
     }
 
     async listDocumentation(offset = 0, size = 100) {
-        const items = this.documentationIndex?.listItems() ?? []
+        if (!this.documentationIndex) {
+            throw new Error('Documentation index not loaded')
+        }
+
+        const items = this.documentationIndex.listItems() ?? []
         return (await items).slice(offset, offset + size)
     }
 
     async listProductRelevance(offset = 0, size = 100) {
-        const items = this.productRelevanceIndex?.listItems() ?? []
+        if (!this.productRelevanceIndex) {
+            throw new Error('Product relevance index not loaded')
+        }
+
+        const items = this.productRelevanceIndex.listItems() ?? []
         return (await items).slice(offset, offset + size)
+    }
+
+    async queryProductRelevance(text: string, topK = 10): Promise<QueryResult<ProductRelevanceMetadata>[] | undefined> {
+        if (!this.productRelevanceIndex) {
+            throw new Error('Product relevance index not loaded')
+        }
+
+        return await this.productRelevanceIndex.queryItems(await this.embedder.embed(text), text, topK)
     }
 
     async removeQAItem(id: string): Promise<void> {
@@ -130,38 +163,5 @@ export class VectorStore {
 
     async removeProductRelevance(id: string): Promise<void> {
         await this.productRelevanceIndex?.deleteItem(id)
-    }
-
-    // TODO: i think i need this GONE out of here to AI.ts
-    // ts is high level
-    async checkProductRelevance(text: string, topK = 10): Promise<ProductRelevanceResult> {
-        if (!this.productRelevanceIndex) {
-            // TODO: this isnt really good semantics
-            return { score: 0, similarity: 0, isRelevant: false }
-        }
-
-        const vector = await this.embedder.embed(text)
-        const results = await this.productRelevanceIndex.queryItems(vector, text, topK)
-
-        if (results.length === 0) {
-            // TODO: this isnt really good semantics
-            return { score: 0.5, similarity: 0, isRelevant: false }
-        }
-
-        const bestPositive = results.find(r => r.item.metadata.isPositive)
-        const bestNegative = results.find(r => !r.item.metadata.isPositive)
-
-        const posScore = bestPositive?.score ?? 0
-        const negScore = bestNegative?.score ?? 0
-
-        const diff = posScore - negScore
-
-        // TODO: gotta be tweaked better with constants
-        const isRelevant = diff > 0.02
-        const similarity = diff > 0 && diff <= 0.02 ? 0 : diff
-
-        const score = isRelevant ? 0.5 + posScore / 2 : 0.5 - negScore / 2
-
-        return { score, similarity, isRelevant }
     }
 }

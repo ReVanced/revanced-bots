@@ -115,7 +115,7 @@ export class AI {
 
     async parseMessage(text: string): Promise<ParseMessageResult> {
         const intent = await this.intentClassifier.classify(text)
-        const relevance = await this.vectorStore.checkProductRelevance(text)
+        const relevance = await this.checkProductRelevance(text)
 
         if (!intent.isActionable) {
             // TODO: i dont like these semantics
@@ -192,7 +192,7 @@ export class AI {
     async validateAnswer(question: string, answer: string): Promise<ValidateAnswerResult> {
         const [validation, topicRelevance] = await Promise.all([
             this.answerValidator.validate(question, answer),
-            this.vectorStore.checkProductRelevance(`${question} ${answer}`),
+            this.checkProductRelevance(`${question} ${answer}`),
         ])
 
         return { ...validation, topicRelevance }
@@ -300,16 +300,41 @@ export class AI {
         await this.vectorStore.removeDocumentation(id)
     }
 
+    async checkProductRelevance(text: string): Promise<ProductRelevanceResult> {
+        const results = await this.vectorStore.queryProductRelevance(text)
+
+        if (!results) {
+            throw new Error('Failed to retrieve results for product relevance')
+        }
+
+        if (results.length === 0) {
+            // TODO: this isnt really good semantics
+            return { score: 0.5, similarity: 0, isRelevant: false }
+        }
+
+        const bestPositive = results.find(r => r.item.metadata.isPositive)
+        const bestNegative = results.find(r => !r.item.metadata.isPositive)
+
+        const posScore = bestPositive?.score ?? 0
+        const negScore = bestNegative?.score ?? 0
+
+        const diff = posScore - negScore
+
+        // TODO: gotta be tweaked better with constants
+        const isRelevant = diff > 0.02
+        const similarity = diff > 0 && diff <= 0.02 ? 0 : diff
+
+        const score = isRelevant ? 0.5 + posScore / 2 : 0.5 - negScore / 2
+
+        return { score, similarity, isRelevant }
+    }
+
     async trainPositiveRelevance(text: string): Promise<void> {
         await this.vectorStore.addPositiveRelevance(text)
     }
 
     async trainNegativeRelevance(text: string): Promise<void> {
         await this.vectorStore.addNegativeRelevance(text)
-    }
-
-    async checkProductRelevance(text: string): Promise<ProductRelevanceResult> {
-        return this.vectorStore.checkProductRelevance(text)
     }
 
     getResponseThresholds(): Readonly<{ qa: number; docs: number }> {

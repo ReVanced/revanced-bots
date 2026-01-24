@@ -8,7 +8,7 @@
   "scripts": {
     "build": "bun bundle && bun types",
     "watch": "conc --raw \"bun bundle:watch\" \"bun types:watch\"",
-    "bundle": "bun build src/index.ts --outdir=dist --sourcemap=external --target=bun --minify",
+    "bundle": "bun build src/index.ts --outdir=dist --sourcemap=external --target=bun --minify --external=onnxruntime-node --external=sharp",
     "bundle:watch": "bun run bundle --watch",
     "types": "tsc --declaration --emitDeclarationOnly",
     "types:watch": "bun types --watch --preserveWatchOutput",

@@ -1,6 +1,6 @@
+import type { AI } from '@revanced/bot-ai'
 import type { ClientOperation, Logger } from '@revanced/bot-shared'
 import type { Worker as TesseractWorker } from 'tesseract.js'
-import type { AI } from '../classes/AI'
 import type { ClientPacketObject } from '../classes/Client'
 import type { Config } from '../utils/config'
 

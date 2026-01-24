@@ -1,5 +1,5 @@
 import { LocalIndex, type MetadataTypes, type QueryResult } from 'vectra'
-import type { Config } from '../utils/config'
+import type { IndexesConfig } from '../types'
 import type { Embedder } from './Embedder'
 
 export interface QAMetadata extends Record<string, MetadataTypes> {
@@ -32,14 +32,14 @@ export class VectorStore {
     private documentationIndex: LocalIndex<DocumentationMetadata> | null = null
 
     constructor(
-        private readonly config: Config,
+        private readonly indexes: IndexesConfig,
         private readonly embedder: Embedder,
     ) {}
 
     async load(): Promise<void> {
-        this.questionAnswerIndex = new LocalIndex<QAMetadata>(this.config.ai.indexes.qa)
-        this.productRelevanceIndex = new LocalIndex<ProductRelevanceMetadata>(this.config.ai.indexes.productRelevance)
-        this.documentationIndex = new LocalIndex<DocumentationMetadata>(this.config.ai.indexes.documentation)
+        this.questionAnswerIndex = new LocalIndex<QAMetadata>(this.indexes.qa)
+        this.productRelevanceIndex = new LocalIndex<ProductRelevanceMetadata>(this.indexes.productRelevance)
+        this.documentationIndex = new LocalIndex<DocumentationMetadata>(this.indexes.documentation)
 
         // its okay if you don't have them yet, we're not strict about it
         // i dont think i would even warn you about it

@@ -28,6 +28,7 @@ export class AnswerValidator {
     async load(): Promise<void> {
         if (this.pipeline) return
 
+        // @ts-expect-error very complex union trust me bro
         this.pipeline = (await pipeline('text-classification', this.config.modelPath, {
             // @ts-expect-error god shall forgive me
             dtype: this.config.quant,

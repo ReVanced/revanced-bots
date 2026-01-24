@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "module": "ESNext",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "composite": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["./*.json", "src/**/*.ts", "scripts/**/*.ts"]
+}

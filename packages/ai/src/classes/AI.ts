@@ -6,8 +6,7 @@ import { type IntentClassificationResult, IntentClassifier } from './IntentClass
 import { LLM } from './LLM'
 import { Rag } from './RAG'
 import { type ProductRelevanceResult, VectorStore } from './VectorStore'
-import type { AnswerValidationLabel, IntentClassificationLabel } from '@revanced/bot-shared'
-import type { Config } from '../utils/config'
+import type { AIConfig } from '../types'
 
 export interface ParseMessageResult {
     intent: IntentClassificationResult
@@ -55,47 +54,47 @@ export class AI {
     private readonly rag: Rag
     private readonly documentParser: DocumentParser
 
-    constructor(config: Config) {
+    constructor(config: AIConfig) {
         this.runtimeConfig = {
-            llmSystemPrompt: config.ai.llm.systemPrompt,
-            useLLM: config.ai.llm.enabled,
+            llmSystemPrompt: config.llm.systemPrompt,
+            useLLM: config.llm.enabled,
         }
 
         this.embedder = new Embedder({
-            modelPath: config.ai.embeddings.modelPath,
-            quant: config.ai.embeddings.quant,
+            modelPath: config.embeddings.modelPath,
+            quant: config.embeddings.quant,
         })
 
-        this.vectorStore = new VectorStore(config, this.embedder)
+        this.vectorStore = new VectorStore(config.indexes, this.embedder)
 
-        this.rag = new Rag(config.ai.rag)
+        this.rag = new Rag(config.rag)
 
         this.intentClassifier = new IntentClassifier({
-            modelPath: config.ai.intentClassification.modelPath,
-            quant: config.ai.intentClassification.quant,
-            thresholds: config.ai.intentClassification.thresholds as Record<IntentClassificationLabel, number>,
+            modelPath: config.intentClassification.modelPath,
+            quant: config.intentClassification.quant,
+            thresholds: config.intentClassification.thresholds,
         })
 
         this.answerValidator = new AnswerValidator({
-            modelPath: config.ai.answerValidation.modelPath,
-            quant: config.ai.answerValidation.quant,
-            thresholds: config.ai.answerValidation.thresholds as Record<AnswerValidationLabel, number>,
+            modelPath: config.answerValidation.modelPath,
+            quant: config.answerValidation.quant,
+            thresholds: config.answerValidation.thresholds,
         })
 
         this.documentParser = new DocumentParser({
-            maxChunkSize: config.ai.documentParser.maxChunkSize,
-            chunkOverlap: config.ai.documentParser.chunkOverlap,
-            timeout: config.ai.documentParser.timeout,
+            maxChunkSize: config.documentParser.maxChunkSize,
+            chunkOverlap: config.documentParser.chunkOverlap,
+            timeout: config.documentParser.timeout,
         })
 
         const llmApiKey = process.env['LLM_API_KEY']
-        if (config.ai.llm?.enabled && llmApiKey) {
+        if (config.llm?.enabled && llmApiKey) {
             this.llm = new LLM({
                 apiKey: llmApiKey,
-                baseURL: config.ai.llm.baseURL,
-                model: config.ai.llm.model,
-                temperature: config.ai.llm.temperature,
-                llmSystemPrompt: config.ai.llm.systemPrompt,
+                baseURL: config.llm.baseURL,
+                model: config.llm.model,
+                temperature: config.llm.temperature,
+                llmSystemPrompt: config.llm.systemPrompt,
             })
             this.runtimeConfig.useLLM = true
         } else {

@@ -27,22 +27,14 @@
   },
   "homepage": "https://github.com/revanced/revanced-bots#readme",
   "dependencies": {
-    "@huggingface/transformers": "^3.8.1",
-    "@langchain/textsplitters": "^1.0.1",
-    "@mozilla/readability": "^0.6.0",
+    "@revanced/bot-ai": "workspace:*",
     "@revanced/bot-shared": "workspace:*",
     "@sapphire/async-queue": "^1.5.5",
     "chalk": "^5.6.2",
-    "jsdom": "^27.4.0",
-    "openai": "^6.15.0",
     "tesseract.js": "^6.0.1",
-    "turndown": "^7.2.2",
-    "vectra": "^0.11.1",
     "ws": "^8.18.3"
   },
   "devDependencies": {
-    "@types/jsdom": "^27.0.0",
-    "@types/turndown": "^5.0.6",
     "@types/ws": "^8.18.1",
     "typed-emitter": "^2.1.0"
   }

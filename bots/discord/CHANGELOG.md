@@ -1,3 +1,11 @@
+# @revanced/discord-bot [1.6.0-dev.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.3...@revanced/discord-bot@1.6.0-dev.1) (2026-02-22)
+
+
+### Features
+
+* **bots/discord:** add remind/unremind command ([#51](https://github.com/revanced/revanced-bots/issues/51)) ([18a119f](https://github.com/revanced/revanced-bots/commit/18a119fdad2af838e2d1fae5094ef9c5358e6d8c))
+* **bots/discord:** auto migrate database schema ([d34d3a5](https://github.com/revanced/revanced-bots/commit/d34d3a5abd5a87365bc1ca9ec2fe2f1fa8f8e58f))
+
 ## @revanced/discord-bot [1.5.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.2...@revanced/discord-bot@1.5.3) (2026-01-17)
 
 

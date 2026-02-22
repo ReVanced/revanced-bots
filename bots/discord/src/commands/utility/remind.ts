@@ -79,7 +79,7 @@ export default new Command({
 
         // Create a new reminder
         const targetUser = user ?? interaction.user
-        const durationMs = interval ? parseDuration(interval, 'd') : parseDuration('1d')
+        const durationMs = parseDuration(interval ?? '1d', 'd')
 
         if (durationMs <= 0 || !Number.isFinite(durationMs)) {
             const embed = applyCommonEmbedStyles(

@@ -69,7 +69,7 @@ async function checkReminders(client: Client) {
                 })
                 .where(eq(reminders.id, reminder.id))
         } catch (e) {
-            logger.error(`Error while processing reminder #${reminder.id}: ${e}`)
+            logger.error(`Error while processing reminder #${reminder.id}:`, e)
         }
     }
 }

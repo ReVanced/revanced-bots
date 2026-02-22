@@ -3,7 +3,7 @@ import { Client as APIClient } from '@revanced/bot-api'
 import { createLogger } from '@revanced/bot-shared'
 import { Client as DiscordClient, type Message, Options, Partials } from 'discord.js'
 import { drizzle } from 'drizzle-orm/bun-sqlite'
-import { existsSync, readdirSync, readFileSync } from 'fs'
+import { migrate } from 'drizzle-orm/bun-sqlite/migrator'
 import { join } from 'path'
 import { __getConfig, config } from './config'
 import * as schemas from './database/schemas'
@@ -30,36 +30,16 @@ export const api = {
 }
 
 const DatabasePath = process.env['DATABASE_PATH']
-const DatabaseSchemaDir = join(import.meta.dir, '..', '.drizzle')
-
-let dbSchemaFileName: string | undefined
-
-if (DatabasePath && !existsSync(DatabasePath)) {
-    logger.warn('Database file not found, trying to create from schema...')
-
-    try {
-        const file = readdirSync(DatabaseSchemaDir, { withFileTypes: true })
-            .filter(file => file.isFile() && file.name.endsWith('.sql'))
-            .sort()
-            .at(-1)
-
-        if (!file) throw new Error('No schema file found')
-
-        dbSchemaFileName = file.name
-        logger.debug(`Using schema file: ${dbSchemaFileName}`)
-    } catch (e) {
-        logger.fatal('Could not create database from schema, check if the schema file exists and is accessible')
-        logger.fatal(e)
-        process.exit(1)
-    }
-}
 
 const db = new Database(DatabasePath, { readwrite: true, create: true })
-if (dbSchemaFileName) db.run(readFileSync(join(DatabaseSchemaDir, dbSchemaFileName)).toString())
 
-export const database = drizzle(db, {
+const database = drizzle(db, {
     schema: schemas,
 })
+
+migrate(database, { migrationsFolder: join(import.meta.dir, '..', '.drizzle') })
+
+export { database }
 
 export const discord = {
     client: new DiscordClient({

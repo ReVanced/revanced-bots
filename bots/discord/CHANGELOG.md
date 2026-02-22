@@ -1,3 +1,16 @@
+# @revanced/discord-bot [1.6.0-dev.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0-dev.1...@revanced/discord-bot@1.6.0-dev.2) (2026-02-22)
+
+
+### Bug Fixes
+
+* **bots/discord:** add missing database migration file ([f24a8fb](https://github.com/revanced/revanced-bots/commit/f24a8fbfdc968971c73715d0bf9768dec3341954))
+* **bots/discord:** off-by-one reminders query + log if query fails ([26680a9](https://github.com/revanced/revanced-bots/commit/26680a97fd15cc75250cd91a612132844567c54b))
+
+
+### Features
+
+* **bots/discord/database/schemas:** add indexes on reminders ([99c7422](https://github.com/revanced/revanced-bots/commit/99c74227c4185fa4d6731dac03230312d9b3106a))
+
 # @revanced/discord-bot [1.6.0-dev.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.3...@revanced/discord-bot@1.6.0-dev.1) (2026-02-22)
 
 

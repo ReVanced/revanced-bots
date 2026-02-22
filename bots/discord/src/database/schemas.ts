@@ -1,18 +1,25 @@
 import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 import type { InferSelectModel } from 'drizzle-orm'
 
-export const reminders = sqliteTable('reminders', {
-    id: integer('id').primaryKey({ autoIncrement: true }),
-    creatorId: text('creator').notNull(),
-    targetId: text('target').notNull(),
-    guildId: text('guild').notNull(),
-    channelId: text('channel').notNull(),
-    message: text('message').notNull(),
-    createdAt: integer('created_at').notNull(),
-    remindAt: integer('remind_at').notNull(),
-    intervalSeconds: integer('interval_seconds').notNull(),
-    count: integer('count').notNull().default(0),
-})
+export const reminders = sqliteTable(
+    'reminders',
+    {
+        id: integer('id').primaryKey({ autoIncrement: true }),
+        creatorId: text('creator').notNull(),
+        targetId: text('target').notNull(),
+        guildId: text('guild').notNull(),
+        channelId: text('channel').notNull(),
+        message: text('message').notNull(),
+        createdAt: integer('created_at').notNull(),
+        remindAt: integer('remind_at').notNull(),
+        intervalSeconds: integer('interval_seconds').notNull(),
+        count: integer('count').notNull().default(0),
+    },
+    table => [
+        uniqueIndex('reminders_remind_at_idx').on(table.remindAt),
+        uniqueIndex('reminders_creator_guild_idx').on(table.creatorId, table.guildId),
+    ],
+)
 
 export type Reminder = InferSelectModel<typeof reminders>
 

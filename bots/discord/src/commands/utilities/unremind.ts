@@ -12,6 +12,7 @@ export default new Command({
     type: Command.Type.ChatGuild,
     requirements: {
         roles: config.utilities?.roles,
+        mode: 'any',
     },
     options: {
         id: {

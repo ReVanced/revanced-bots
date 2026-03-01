@@ -2,7 +2,7 @@ import { EmbedBuilder, MessageFlags } from 'discord.js'
 import { eq } from 'drizzle-orm'
 import Command from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
-import { database } from '$/context'
+import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
 
@@ -11,7 +11,7 @@ export default new Command({
     description: 'Remove a reminder',
     type: Command.Type.ChatGuild,
     requirements: {
-        defaultCondition: 'pass',
+        roles: config.utilities?.roles,
     },
     options: {
         id: {

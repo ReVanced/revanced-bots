@@ -19,6 +19,9 @@ export type Config = {
             thread?: string
         }
     }
+    utilities?: {
+        roles?: string[]
+    }
     rolePresets?: {
         checkExpiredEvery: number
         guilds: Record<string, Record<string, RolePresetConfig>>

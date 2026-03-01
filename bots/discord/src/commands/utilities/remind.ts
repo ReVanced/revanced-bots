@@ -1,7 +1,7 @@
 import { EmbedBuilder, MessageFlags } from 'discord.js'
 import { eq } from 'drizzle-orm'
 import Command from '$/classes/Command'
-import { database } from '$/context'
+import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
 import { durationToString, parseDuration } from '$/utils/duration'
@@ -15,7 +15,7 @@ export default new Command({
     description: 'Set a reminder or list your reminders',
     type: Command.Type.ChatGuild,
     requirements: {
-        defaultCondition: 'pass',
+        roles: config.utilities?.roles,
     },
     options: {
         message: {

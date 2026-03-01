@@ -35,6 +35,9 @@ export default {
             thread: 'THREAD_ID_HERE',
         },
     },
+    utilities: {
+        roles: ['ROLE_ID_HERE'],
+    },
     rolePresets: {
         guilds: {
             GUILD_ID_HERE: {

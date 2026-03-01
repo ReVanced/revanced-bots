@@ -20,4 +20,3 @@ await cp('./config.js', './dist/config.js')
 
 logger.info('Copying database schema...')
 await cp('./.drizzle', './dist/.drizzle', { recursive: true })
-await rm('./.drizzle', { recursive: true })

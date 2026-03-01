@@ -178,7 +178,6 @@ dist
 *.db
 *.sqlite
 *.sqlite3
-.drizzle
 
 # Auto-generated files
 src/commands/index.ts

@@ -1,3 +1,34 @@
+# @revanced/discord-bot [1.6.0-dev.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0-dev.2...@revanced/discord-bot@1.6.0-dev.3) (2026-03-01)
+
+
+### Bug Fixes
+
+* **bots/discord/database/schemas:** index instead of unique index on reminders ([cafdbc0](https://github.com/revanced/revanced-bots/commit/cafdbc0c7bb43947afc7e7a262b2a0eb62791511))
+* **bots/discord:** add min max intervals in `remind` command ([1f1dd74](https://github.com/revanced/revanced-bots/commit/1f1dd7410204fb0b8ecddd655ee23fb107ec02cd))
+* **bots/discord:** require roles for using utility commands ([b519b56](https://github.com/revanced/revanced-bots/commit/b519b562f9bc1415bcd3a3cfa7bd73e18b2b21b2))
+* **bots/discord:** throw error if nothing inserted during adding reminders ([a94fd74](https://github.com/revanced/revanced-bots/commit/a94fd742a7f0b3cf8a7f31e716b88fe27f89f70b))
+
+# @revanced/discord-bot [1.6.0-dev.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0-dev.1...@revanced/discord-bot@1.6.0-dev.2) (2026-02-22)
+
+
+### Bug Fixes
+
+* **bots/discord:** add missing database migration file ([f24a8fb](https://github.com/revanced/revanced-bots/commit/f24a8fbfdc968971c73715d0bf9768dec3341954))
+* **bots/discord:** off-by-one reminders query + log if query fails ([26680a9](https://github.com/revanced/revanced-bots/commit/26680a97fd15cc75250cd91a612132844567c54b))
+
+
+### Features
+
+* **bots/discord/database/schemas:** add indexes on reminders ([99c7422](https://github.com/revanced/revanced-bots/commit/99c74227c4185fa4d6731dac03230312d9b3106a))
+
+# @revanced/discord-bot [1.6.0-dev.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.3...@revanced/discord-bot@1.6.0-dev.1) (2026-02-22)
+
+
+### Features
+
+* **bots/discord:** add remind/unremind command ([#51](https://github.com/revanced/revanced-bots/issues/51)) ([18a119f](https://github.com/revanced/revanced-bots/commit/18a119fdad2af838e2d1fae5094ef9c5358e6d8c))
+* **bots/discord:** auto migrate database schema ([d34d3a5](https://github.com/revanced/revanced-bots/commit/d34d3a5abd5a87365bc1ca9ec2fe2f1fa8f8e58f))
+
 ## @revanced/discord-bot [1.5.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.2...@revanced/discord-bot@1.5.3) (2026-01-17)
 
 

@@ -107,7 +107,8 @@ export default new Command({
             })
             .returning()
 
-        const reminderId = inserted?.id ?? 'unknown'
+        const reminderId = inserted?.id
+        if (!reminderId) throw new CommandError(CommandErrorType.Generic, 'Failed to create reminder.')
 
         const targetStr = targetUser.id === interaction.user.id ? 'You' : targetUser.toString()
 

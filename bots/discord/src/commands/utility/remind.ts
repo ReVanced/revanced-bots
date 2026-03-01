@@ -5,6 +5,10 @@ import { database } from '$/context'
 import { reminders } from '$/database/schemas'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
 import { durationToString, parseDuration } from '$/utils/duration'
+import CommandError, { CommandErrorType } from '$/classes/CommandError'
+
+const MIN_DURATION = parseDuration('1m')
+const MAX_DURATION = parseDuration('1y')
 
 export default new Command({
     name: 'remind',
@@ -21,7 +25,7 @@ export default new Command({
             maxLength: 1000,
         },
         interval: {
-            description: 'When to remind (e.g., 1d, 2h30m, 1w). Default: 1 day',
+            description: 'When to remind (e.g., 1d, 2h30m, 1w). Default: 1 day. Min: 1 minute. Max: 1 year.',
             required: false,
             type: Command.OptionType.String,
         },
@@ -81,23 +85,8 @@ export default new Command({
         const targetUser = user ?? interaction.user
         const durationMs = parseDuration(interval ?? '1d', 'd')
 
-        if (durationMs <= 0 || !Number.isFinite(durationMs)) {
-            const embed = applyCommonEmbedStyles(
-                new EmbedBuilder()
-                    .setTitle('Invalid duration')
-                    .setDescription('Please provide a valid duration (e.g., 1d, 2h30m, 1w).')
-                    .setColor('Red'),
-                false,
-                false,
-                false,
-            )
-
-            await interaction.reply({
-                embeds: [embed],
-                flags: MessageFlags.Ephemeral,
-            })
-            return
-        }
+        if (durationMs < MIN_DURATION || durationMs > MAX_DURATION)
+            throw new CommandError(CommandErrorType.InvalidArgument, 'Interval must be between 1 minute and 1 year.')
 
         const now = Math.floor(Date.now() / 1000)
         const remindAt = now + Math.floor(durationMs / 1000)

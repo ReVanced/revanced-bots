@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
+import { index, integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core'
 import type { InferSelectModel } from 'drizzle-orm'
 
 export const reminders = sqliteTable(
@@ -16,8 +16,8 @@ export const reminders = sqliteTable(
         count: integer('count').notNull().default(0),
     },
     table => [
-        uniqueIndex('reminders_remind_at_idx').on(table.remindAt),
-        uniqueIndex('reminders_creator_guild_idx').on(table.creatorId, table.guildId),
+        index('reminders_remind_at_idx').on(table.remindAt),
+        index('reminders_creator_guild_idx').on(table.creatorId, table.guildId),
     ],
 )
 

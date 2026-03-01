@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.6.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0...@revanced/discord-bot@1.6.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* **bots/discord:** utility commands not letting users pass requirements ([d41b473](https://github.com/revanced/revanced-bots/commit/d41b4732f8bbc4d49172c6ccf8a3bec50e169aa3))
+
 # @revanced/discord-bot [1.6.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.5.3...@revanced/discord-bot@1.6.0) (2026-03-01)
 
 

@@ -1,3 +1,13 @@
+# @revanced/discord-bot [1.6.0-dev.3](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0-dev.2...@revanced/discord-bot@1.6.0-dev.3) (2026-03-01)
+
+
+### Bug Fixes
+
+* **bots/discord/database/schemas:** index instead of unique index on reminders ([cafdbc0](https://github.com/revanced/revanced-bots/commit/cafdbc0c7bb43947afc7e7a262b2a0eb62791511))
+* **bots/discord:** add min max intervals in `remind` command ([1f1dd74](https://github.com/revanced/revanced-bots/commit/1f1dd7410204fb0b8ecddd655ee23fb107ec02cd))
+* **bots/discord:** require roles for using utility commands ([b519b56](https://github.com/revanced/revanced-bots/commit/b519b562f9bc1415bcd3a3cfa7bd73e18b2b21b2))
+* **bots/discord:** throw error if nothing inserted during adding reminders ([a94fd74](https://github.com/revanced/revanced-bots/commit/a94fd742a7f0b3cf8a7f31e716b88fe27f89f70b))
+
 # @revanced/discord-bot [1.6.0-dev.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0-dev.1...@revanced/discord-bot@1.6.0-dev.2) (2026-02-22)
 
 

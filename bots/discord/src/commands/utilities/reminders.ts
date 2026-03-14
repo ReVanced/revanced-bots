@@ -1,5 +1,5 @@
 import { EmbedBuilder, MessageFlags } from 'discord.js'
-import { eq,or } from 'drizzle-orm'
+import { eq, or } from 'drizzle-orm'
 import Command from '$/classes/Command'
 import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
@@ -42,13 +42,19 @@ export default new Command({
         }
 
         const reminderList = userReminders
-            .map(r => {
-                const targetStr = r.targetId === r.creatorId ? 'yourself' : `<@${r.targetId}>`
-                return (
+            .map(
+                r =>
                     `**${r.id}.** ${r.message.substring(0, 50)}${r.message.length > 50 ? '...' : ''}\n` +
-                    `-# For ${targetStr} • <t:${r.remindAt}:R> • Reminded ${r.count}x`
-                )
-            })
+                    [
+                        `For ${r.targetId === targetId ? 'yourself' : `<@${r.targetId}>`}`,
+                        r.creatorId !== targetId && `Set by <@${r.creatorId}>`,
+                        `<t:${r.remindAt}:R>`,
+                        `Reminded ${r.count} times`,
+                    ]
+                        .filter(Boolean)
+                        .join(' • '),
+            )
+
             .join('\n\n')
 
         const embed = applyCommonEmbedStyles(

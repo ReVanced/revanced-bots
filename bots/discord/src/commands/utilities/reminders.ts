@@ -1,5 +1,5 @@
 import { EmbedBuilder, MessageFlags } from 'discord.js'
-import { eq } from 'drizzle-orm'
+import { eq,or } from 'drizzle-orm'
 import Command from '$/classes/Command'
 import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
@@ -21,8 +21,9 @@ export default new Command({
         },
     },
     async execute(_, interaction, { user }) {
+        const targetId = user?.id ?? interaction.user.id
         const userReminders = await database.query.reminders.findMany({
-            where: eq(reminders.creatorId, user?.id ?? interaction.user.id),
+            where: or(eq(reminders.creatorId, targetId), eq(reminders.targetId, targetId)),
         })
 
         if (userReminders.length === 0) {

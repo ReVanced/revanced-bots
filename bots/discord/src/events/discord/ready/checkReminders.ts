@@ -43,10 +43,10 @@ async function checkReminders(client: Client) {
 
             const embed = applyCommonEmbedStyles(
                 new EmbedBuilder()
-                    .setTitle(`Reminder (#${newCount})`)
+                    .setTitle(`Reminder #${reminder.id}`)
                     .setDescription(reminder.message)
                     .setFooter({
-                        text: `Set on ${new Date(reminder.createdAt * 1000).toLocaleDateString()}`,
+                        text: `Set on ${new Date(reminder.createdAt * 1000).toLocaleDateString()} • Reminded ${newCount} times`,
                     }),
                 false,
                 false,

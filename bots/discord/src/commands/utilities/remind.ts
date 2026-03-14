@@ -1,5 +1,4 @@
-import { EmbedBuilder, MessageFlags } from 'discord.js'
-import { eq } from 'drizzle-orm'
+import { EmbedBuilder } from 'discord.js'
 import Command from '$/classes/Command'
 import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
@@ -12,7 +11,7 @@ const MAX_DURATION = parseDuration('1y')
 
 export default new Command({
     name: 'remind',
-    description: 'Set a reminder or list your reminders',
+    description: 'Set a reminder',
     type: Command.Type.ChatGuild,
     requirements: {
         roles: config.utilities?.roles,
@@ -21,7 +20,7 @@ export default new Command({
     options: {
         message: {
             description: 'The reminder message',
-            required: false,
+            required: true,
             type: Command.OptionType.String,
             maxLength: 1000,
         },
@@ -37,52 +36,6 @@ export default new Command({
         },
     },
     async execute({ logger }, interaction, { message, interval, user }) {
-        // If no message is provided, list all reminders
-        if (!message) {
-            const userReminders = await database.query.reminders.findMany({
-                where: eq(reminders.creatorId, interaction.user.id),
-            })
-
-            if (userReminders.length === 0) {
-                const embed = applyCommonEmbedStyles(
-                    new EmbedBuilder().setTitle('No Reminders').setDescription('You have no active reminders.'),
-                    false,
-                    true,
-                    true,
-                )
-
-                await interaction.reply({
-                    embeds: [embed],
-                    flags: MessageFlags.Ephemeral,
-                })
-                return
-            }
-
-            const reminderList = userReminders
-                .map(r => {
-                    const targetStr = r.targetId === r.creatorId ? 'yourself' : `<@${r.targetId}>`
-                    return (
-                        `**${r.id}.** ${r.message.substring(0, 50)}${r.message.length > 50 ? '...' : ''}\n` +
-                        `-# For ${targetStr} • <t:${r.remindAt}:R> • Reminded ${r.count}x`
-                    )
-                })
-                .join('\n\n')
-
-            const embed = applyCommonEmbedStyles(
-                new EmbedBuilder().setTitle('Your Reminders').setDescription(reminderList),
-                false,
-                true,
-                true,
-            )
-
-            await interaction.reply({
-                embeds: [embed],
-                flags: MessageFlags.Ephemeral,
-            })
-            return
-        }
-
-        // Create a new reminder
         const targetUser = user ?? interaction.user
         const durationMs = parseDuration(interval ?? '1d', 'd')
 

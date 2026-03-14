@@ -1,3 +1,10 @@
+## @revanced/discord-bot [1.7.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.7.0...@revanced/discord-bot@1.7.1) (2026-03-14)
+
+
+### Bug Fixes
+
+* **bots/discord:** show reminders set by others in `/reminders` ([6e23483](https://github.com/revanced/revanced-bots/commit/6e2348324ab5da853b15194f038fa10f945583ce))
+
 # @revanced/discord-bot [1.7.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.1...@revanced/discord-bot@1.7.0) (2026-03-14)
 
 

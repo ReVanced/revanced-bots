@@ -1,3 +1,10 @@
+# @revanced/discord-bot [1.7.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.1...@revanced/discord-bot@1.7.0) (2026-03-14)
+
+
+### Features
+
+* **bots/discord:** improve reminders ([30e767b](https://github.com/revanced/revanced-bots/commit/30e767bbdbc206f121ee0964a20dde34c6f3d927))
+
 ## @revanced/discord-bot [1.6.1](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.6.0...@revanced/discord-bot@1.6.1) (2026-03-01)
 
 

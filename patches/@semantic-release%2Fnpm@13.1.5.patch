@@ -47,14 +47,14 @@ index 3e76bec44cf595a1b4141728336bed904d4d518d..4b25ca64879bbee2a600f2b23b738c86
    }
  }
 diff --git a/package.json b/package.json
-index e716bf6b35130c168ab7c4babc89a0346aacc9ad..e372de1ca5967509a6769db88ff967e1039b03ac 100644
+index 92c30a3473d8d3cd19e11a2c85eb8cedd5670fc4..923798efe9f4a3ffa36ab9cf7950a17bd187cac5 100644
 --- a/package.json
 +++ b/package.json
-@@ -21,6 +21,7 @@
-   "dependencies": {
+@@ -22,6 +22,7 @@
+     "@actions/core": "^3.0.0",
      "@semantic-release/error": "^4.0.0",
      "aggregate-error": "^5.0.0",
 +    "detect-indent": "^7.0.1",
+     "env-ci": "^11.2.0",
      "execa": "^9.0.0",
      "fs-extra": "^11.0.0",
-     "lodash-es": "^4.17.21",

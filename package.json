@@ -58,6 +58,6 @@
     "lefthook"
   ],
   "patchedDependencies": {
-    "@semantic-release/npm@12.0.2": "patches/@semantic-release%2Fnpm@12.0.2.patch"
+    "@semantic-release/npm@13.1.5": "patches/@semantic-release%2Fnpm@13.1.5.patch"
   }
 }

@@ -1,3 +1,17 @@
+# @revanced/discord-bot [1.8.0](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.7.2...@revanced/discord-bot@1.8.0) (2026-06-21)
+
+
+### Bug Fixes
+
+* **bots/discord:** allow reminding for someone else ([bf1f402](https://github.com/revanced/revanced-bots/commit/bf1f402e51d44d76574fa18dd8004216a8d40e04))
+* linting errors ([8575b1c](https://github.com/revanced/revanced-bots/commit/8575b1ca732501f6f1bcd43dbc6b397807e42cdb))
+* update usage of `fs.exists(Sync)` to `fs.access(Sync)` ([c66a95c](https://github.com/revanced/revanced-bots/commit/c66a95c03c4135c52c5f601ef04c9947d634b643))
+
+
+### Features
+
+* allow muting members outside servers ([783e0e4](https://github.com/revanced/revanced-bots/commit/783e0e4d6ecc9bf7c67e114568ff91faf9711769))
+
 ## @revanced/discord-bot [1.7.2](https://github.com/revanced/revanced-bots/compare/@revanced/discord-bot@1.7.1...@revanced/discord-bot@1.7.2) (2026-03-14)
 
 

@@ -2,7 +2,12 @@ import { ModerationCommand } from '$/classes/Command'
 import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { createModerationActionEmbed } from '$/utils/discord/embeds'
 import { sendModerationReplyAndLogs } from '$/utils/discord/moderation'
-import { applyRolePreset, removeRolePreset } from '$/utils/discord/rolePresets'
+import {
+    applyRolePreset,
+    applyRolePresetForUser,
+    removeRolePreset,
+    removeRolePresetForUser,
+} from '$/utils/discord/rolePresets'
 import { isSafeTimeoutDuration, parseDuration } from '$/utils/duration'
 
 export default new ModerationCommand({
@@ -31,7 +36,7 @@ export default new ModerationCommand({
         { member: user, reason = 'No reason provided', duration: durationInput },
     ) {
         const guild = await interaction.client.guilds.fetch(interaction.guildId)
-        const member = await guild.members.fetch(user.id)
+        const member = await guild.members.fetch(user.id).catch(() => null)
         const moderator = await guild.members.fetch(executor.id)
         const duration = durationInput ? parseDuration(durationInput, 'm') : Infinity
 
@@ -42,22 +47,20 @@ export default new ModerationCommand({
             )
 
         const expires = Math.max(duration, Date.now() + duration)
-        if (!member)
-            throw new CommandError(
-                CommandErrorType.InvalidArgument,
-                'The provided member is not in the server or does not exist.',
-            )
+        if (member) {
+            if (!member.manageable)
+                throw new CommandError(CommandErrorType.Generic, 'This user cannot be managed by the bot.')
 
-        if (!member.manageable)
-            throw new CommandError(CommandErrorType.Generic, 'This user cannot be managed by the bot.')
+            if (moderator.roles.highest.comparePositionTo(member.roles.highest) <= 0)
+                throw new CommandError(
+                    CommandErrorType.InvalidArgument,
+                    'You cannot mute a user with a role equal to or higher than yours.',
+                )
+            await applyRolePreset(member, 'mute', expires)
+        } else {
+            await applyRolePresetForUser(user.id, guild.id, 'mute', expires)
+        }
 
-        if (moderator.roles.highest.comparePositionTo(member.roles.highest) <= 0)
-            throw new CommandError(
-                CommandErrorType.InvalidArgument,
-                'You cannot mute a user with a role equal to or higher than yours.',
-            )
-
-        await applyRolePreset(member, 'mute', expires)
         await sendModerationReplyAndLogs(
             interaction,
             createModerationActionEmbed('Muted', user, executor.user, reason, Math.ceil(expires / 1000)),
@@ -65,7 +68,8 @@ export default new ModerationCommand({
 
         if (isSafeTimeoutDuration(duration))
             setTimeout(() => {
-                removeRolePreset(member, 'mute')
+                if (member) removeRolePreset(member, 'mute')
+                else removeRolePresetForUser(user.id, guild.id, 'mute')
             }, duration)
 
         logger.info(

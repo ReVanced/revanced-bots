@@ -4,7 +4,7 @@ import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { appliedPresets } from '$/database/schemas'
 import { createModerationActionEmbed } from '$/utils/discord/embeds'
 import { sendModerationReplyAndLogs } from '$/utils/discord/moderation'
-import { removeRolePreset } from '$/utils/discord/rolePresets'
+import { removeRolePreset, removeRolePresetForUser } from '$/utils/discord/rolePresets'
 
 export default new ModerationCommand({
     name: 'unmute',
@@ -17,21 +17,26 @@ export default new ModerationCommand({
         },
     },
     async execute({ logger, database, executor }, interaction, { member: user }) {
-        const member = await interaction.guild!.members.fetch(user.id)
-        if (!member)
-            throw new CommandError(
-                CommandErrorType.InvalidArgument,
-                'The provided member is not in the server or does not exist.',
-            )
+        const guildId = interaction.guildId
 
         if (
             !(await database.query.appliedPresets.findFirst({
-                where: and(eq(appliedPresets.memberId, member.id), eq(appliedPresets.preset, 'mute')),
+                where: and(
+                    eq(appliedPresets.memberId, user.id),
+                    eq(appliedPresets.preset, 'mute'),
+                    eq(appliedPresets.guildId, guildId),
+                ),
             }))
         )
             throw new CommandError(CommandErrorType.Generic, 'This user is not muted.')
 
-        await removeRolePreset(member, 'mute')
+        const member = await interaction.guild!.members.fetch(user.id).catch(() => null)
+        if (member) {
+            await removeRolePreset(member, 'mute')
+        } else {
+            await removeRolePresetForUser(user.id, guildId, 'mute')
+        }
+
         await sendModerationReplyAndLogs(interaction, createModerationActionEmbed('Unmuted', user, executor.user))
 
         logger.info(`Moderator ${executor.user.tag} (${executor.id}) unmuted ${user.tag} (${user.id})`)

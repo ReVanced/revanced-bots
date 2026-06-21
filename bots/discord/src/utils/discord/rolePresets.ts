@@ -6,40 +6,61 @@ import type { GuildMember } from 'discord.js'
 // TODO: Fix this type
 type PresetKey = string
 
-export const applyRolePreset = async (member: GuildMember, presetName: PresetKey, expires: number) => {
-    const { removed, callback } = await applyRolesUsingPreset(presetName, member)
+export const applyRolePresetForUser = async (
+    userId: string,
+    guildId: string,
+    presetName: PresetKey,
+    expires: number,
+    removedRoles?: string[],
+) => {
     const until = expires === Infinity ? null : Math.ceil(expires / 1000)
 
     await database
         .insert(appliedPresets)
         .values({
-            memberId: member.id,
-            guildId: member.guild.id,
+            memberId: userId,
+            guildId,
             preset: presetName,
-            removedRoles: removed,
+            removedRoles: removedRoles || [],
             until,
         })
         .onConflictDoUpdate({
             target: [appliedPresets.memberId, appliedPresets.preset, appliedPresets.guildId],
             set: { until },
         })
-        .then(callback)
 }
 
-export const removeRolePreset = async (member: GuildMember, presetName: PresetKey) => {
+export const applyRolePreset = async (member: GuildMember, presetName: PresetKey, expires: number) => {
+    const { removed, callback } = await applyRolesUsingPreset(presetName, member)
+
+    await applyRolePresetForUser(member.id, member.guild.id, presetName, expires, removed).then(callback)
+}
+
+export const removeRolePresetForUser = async (
+    userId: string,
+    guildId: string,
+    presetName: PresetKey,
+    task?: (data: typeof appliedPresets.$inferSelect) => Promise<void>,
+) => {
     const where = and(
-        eq(appliedPresets.memberId, member.id),
+        eq(appliedPresets.memberId, userId),
         eq(appliedPresets.preset, presetName),
-        eq(appliedPresets.guildId, member.guild.id),
+        eq(appliedPresets.guildId, guildId),
     )
 
     const data = await database.query.appliedPresets.findFirst({ where })
-    if (!data) return false
+    if (!data) return
 
-    const { callback } = await applyRolesUsingPreset(presetName, member, data.removedRoles)
-    await database.delete(appliedPresets).where(where).execute().then(callback)
+    if (task) await task(data)
 
-    return true
+    await database.delete(appliedPresets).where(where).execute()
+}
+
+export const removeRolePreset = async (member: GuildMember, presetName: PresetKey) => {
+    await removeRolePresetForUser(member.id, member.guild.id, presetName, async data => {
+        const { callback } = await applyRolesUsingPreset(presetName, member, data.removedRoles)
+        await callback()
+    })
 }
 
 export const applyRolesUsingPreset = async (

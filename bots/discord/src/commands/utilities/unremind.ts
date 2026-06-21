@@ -31,14 +31,6 @@ export default new Command({
             throw new CommandError(CommandErrorType.InvalidArgument, `Reminder with ID **${id}** was not found.`)
         }
 
-        // Only the creator can remove the reminder
-        if (reminder.creatorId !== interaction.user.id) {
-            throw new CommandError(
-                CommandErrorType.RequirementsNotMet,
-                'You can only remove reminders that you created.',
-            )
-        }
-
         await database.delete(reminders).where(eq(reminders.id, id))
 
         const embed = applyCommonEmbedStyles(

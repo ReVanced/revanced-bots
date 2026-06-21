@@ -135,8 +135,10 @@ export default class Command<
         if (!this.isGuildSpecific() && !msg.guildId) throw new CommandError(CommandErrorType.InteractionNotInGuild)
 
         const executor = this.isGuildSpecific()
-            ? await msg.guild?.members.fetch(msg.author)!
+            ? await msg.guild?.members.fetch(msg.author)
             : await msg.client.users.fetch(msg.author)
+
+        if (!executor) throw new CommandError(CommandErrorType.FetchManagerNotFound, 'Cannot fetch executor.')
         if (!(await this.canExecute(executor))) throw new CommandError(CommandErrorType.RequirementsNotMet)
 
         const options = this.options

@@ -8,7 +8,8 @@ import { join } from 'path'
 import { __getConfig, config } from './config'
 import * as schemas from './database/schemas'
 import type { default as Command, CommandOptionsOptions, CommandType } from './classes/Command'
-export { config, __getConfig }
+
+export { __getConfig, config }
 
 export const logger = createLogger({
     level: config.logLevel === 'none' ? Number.MAX_SAFE_INTEGER : config.logLevel,

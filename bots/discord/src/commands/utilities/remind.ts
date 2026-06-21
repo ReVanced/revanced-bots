@@ -1,10 +1,10 @@
 import { EmbedBuilder } from 'discord.js'
 import Command from '$/classes/Command'
+import CommandError, { CommandErrorType } from '$/classes/CommandError'
 import { config, database } from '$/context'
 import { reminders } from '$/database/schemas'
 import { applyCommonEmbedStyles } from '$/utils/discord/embeds'
 import { durationToString, parseDuration } from '$/utils/duration'
-import CommandError, { CommandErrorType } from '$/classes/CommandError'
 
 const MIN_DURATION = parseDuration('1m')
 const MAX_DURATION = parseDuration('1y')

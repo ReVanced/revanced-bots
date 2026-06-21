@@ -5,6 +5,13 @@
 
 * update usage of `fs.exists(Sync)` to `fs.access(Sync)` ([c66a95c](https://github.com/revanced/revanced-bots/commit/c66a95c03c4135c52c5f601ef04c9947d634b643))
 
+## @revanced/bot-websocket-api [1.1.1](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.1.0...@revanced/bot-websocket-api@1.1.1) (2026-06-21)
+
+
+### Bug Fixes
+
+* update usage of `fs.exists(Sync)` to `fs.access(Sync)` ([c66a95c](https://github.com/revanced/revanced-bots/commit/c66a95c03c4135c52c5f601ef04c9947d634b643))
+
 # @revanced/bot-websocket-api [1.1.0](https://github.com/revanced/revanced-bots/compare/@revanced/bot-websocket-api@1.0.2...@revanced/bot-websocket-api@1.1.0) (2025-07-11)
 
 

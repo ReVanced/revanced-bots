@@ -1,10 +1,16 @@
 import { createLogger } from '@revanced/bot-shared'
-import { cp, exists, rm } from 'fs/promises'
+import { access, cp, rm } from 'fs/promises'
 
 const logger = createLogger()
 
 logger.info('Cleaning previous build...')
-if (await exists('./dist')) await rm('./dist', { recursive: true })
+if (
+    await access('./dist').then(
+        () => true,
+        () => false,
+    )
+)
+    await rm('./dist', { recursive: true })
 
 logger.info('Building WebSocket API...')
 await Bun.build({

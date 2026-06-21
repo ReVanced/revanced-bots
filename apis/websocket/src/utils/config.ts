@@ -1,10 +1,19 @@
-import { existsSync } from 'fs'
+import { accessSync } from 'fs'
 import { resolve as resolvePath } from 'path'
 import { pathToFileURL } from 'url'
 
 const configPath = resolvePath(process.cwd(), 'config.json')
 
-const userConfig: Partial<Config> = existsSync(configPath)
+const configExists = (() => {
+    try {
+        accessSync(configPath)
+        return true
+    } catch {
+        return false
+    }
+})()
+
+const userConfig: Partial<Config> = configExists
     ? (
           await import(pathToFileURL(configPath).href, {
               with: {

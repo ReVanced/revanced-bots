@@ -1,5 +1,5 @@
 import { createLogger } from '@revanced/bot-shared'
-import { exists as pathExists } from 'fs/promises'
+import { access } from 'fs/promises'
 import { join as joinPath } from 'path'
 import { createWorker as createTesseractWorker, OEM } from 'tesseract.js'
 import { getConfig } from './utils/config'
@@ -65,5 +65,10 @@ const TesseractWorkerPath = joinPath(TesseractWorkerDirPath, 'index.js')
 export const tesseract = await createTesseractWorker(
     'eng',
     OEM.DEFAULT,
-    (await pathExists(TesseractWorkerDirPath)) ? { workerPath: TesseractWorkerPath } : undefined,
+    (await access(TesseractWorkerDirPath).then(
+        () => true,
+        () => false,
+    ))
+        ? { workerPath: TesseractWorkerPath }
+        : undefined,
 )

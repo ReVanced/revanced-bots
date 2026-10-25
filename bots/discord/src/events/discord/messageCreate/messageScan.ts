@@ -78,7 +78,7 @@ withContext(on, 'messageCreate', async (context, msg) => {
             const isTextFile = mimeType.startsWith('text/')
 
             if (isTextFile && attachment.size > (config.attachments.maxTextFileSize ?? 512 * 1000)) {
-                logger.debug(`Attachment ${attachment.url} is too large be to scanned, size is ${attachment.size}`)
+                logger.debug(`Attachment ${attachment.url} is too large to be scanned, size is ${attachment.size}`)
                 continue
             }
 

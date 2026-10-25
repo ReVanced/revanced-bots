@@ -26,7 +26,7 @@ export const getResponseFromText = async (
     for (let i = 0; i < responses.length; i++) {
         const trigger = responses[i]!
 
-        // Filter override check is not neccessary here, we are already passing responses that match the filter
+        // Filter override check is not necessary here, we are already passing responses that match the filter
         // from the messageCreate handler, see line 17 of messageCreate handler
         const {
             triggers: { text: textTriggers, image: imageTriggers },

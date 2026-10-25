@@ -50,7 +50,7 @@ export default class Client {
 
         // Since we don't have heartbeats anymore, this is fine.
         // But if we add anything similar, this will cause another race condition
-        // To fix this, we can try adding a instanced function that would return the currentSequence
+        // To fix this, we can try adding an instanced function that would return the currentSequence
         // and it would be updated every time a "heartbeat ack" packet is received
         const packet = await Promise.race([
             this.#awaiter.await(ServerOperation.ParsedText, this.ws.currentSequence),
